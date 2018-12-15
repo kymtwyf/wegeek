@@ -20,7 +20,8 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "时锦",
     "navigationBarTextStyle": "black",
-    "navigationStyle": "custom"
+    "navigationStyle": "custom",
+    "disableScroll": true
   },
   "plugins": {
     "WechatSI": {
