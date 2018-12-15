@@ -4,6 +4,7 @@ const plugin = requirePlugin("WechatSI")
 const manager = plugin.getRecordRecognitionManager()
 // 获取数据库引用
 const db = wx.cloud.database()
+import { getSlideDirection } from '../utils';
 
 Page({
 
@@ -117,9 +118,9 @@ Page({
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     if (action === 'UP') {
       console.log('go my book page')
-      // wx.navigateTo({
-      //   url: '../'
-      // })
+      wx.navigateTo({
+        url: '../myBook/myBook'
+      })
     }
   }
 })
