@@ -10,6 +10,10 @@ App({
       })
     }
 
-    this.globalData = {}
+    this.globalData = {
+      selfPageIndex: 0,
+      otherOpenId: "",
+      otherPageIndex: 0
+    }
   }
 })

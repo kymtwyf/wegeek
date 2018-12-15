@@ -12,14 +12,10 @@
       bindinput='bindEquipmentId'
     />
   </view>
-  <!-- <view class="record">
-  <i class="font_family icon-huatong" style='color : red'></i>
-  </view> -->
   <view class="buttons">
-    <view class="font_family icon-huatong record " style="font-size :60px;color :{{setRecord?'green':'gray'}}" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd">
+    <view class="font_family icon-huatong record " style="font-size :90rpx; line-height: 140rpx; color :{{setRecord?'green':'gray'}}" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd">
     </view>
-    <!-- <i class="font_family icon-xihuan" style='color : red'></i> -->
-    <view class="submit font_family icon-gouxuan" style="font-size :60px;color :{{setSubmit?'green':'gray'}}" bindtap="submitData">
+    <view class="submit font_family icon-gouxuan" style="font-size :90rpx; line-height: 140rpx; color :{{setSubmit?'green':'gray'}}" bindtap="submitData">
     </view>
   </view>
 </view>
