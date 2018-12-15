@@ -48,8 +48,14 @@ Page({
         // 用户没有说话，可以做一下提示处理...
         return
       }
+      let union_data = this.data.currentText;
+      if (union_data == '') {
+        union_data = text;
+      } else {
+        union_data = union_data + "\n" +text;
+      }
       this.setData({
-        currentText: this.data.currentText + "\n" + text,
+        currentText: union_data,
       })
     }
   },
