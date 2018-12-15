@@ -28,7 +28,23 @@ Page({
     color: undefined
   },
 
-
+  onLoadPage: function (page) {
+    console.log(page)
+    db.collection('comments').where({
+      page_id: page._id
+    }).get().then(res => {
+      console.log(res)
+      this.setData({
+        commentCount: res.data.length,
+        comments: res.data,
+        color: page.color,
+        likeCount: page.likes,
+        pageContent: page.page_content
+      })
+    }).catch(err => {
+    })
+  },
+  
   /**
    * 生命周期函数--监听页面加载
    */
@@ -47,53 +63,12 @@ Page({
         console.log(res)
         this.setData({
           pages: res.data,
-          color: res.data[0].color
+          pageIndex: 0
         })
-        
-        for (var i = 0; i < res.data.length; i++ ){
-          console.log(res.data[i]._id == options.page_id)
-          if (res.data[i]._id == options.page_id) {
-            //console.log(res.data[i])
-            this.setData({
-              pageIndex: i,
-              pageContent: res.data[i].page_content,
-            })
-            break
-          }
-        }
-
-        if (i == res.data.length){
-          this.setData({
-            pageIndex: 0
-          })
-          console.log("index error")
-        }
+        this.onLoadPage(res.data[0])
       },
       fail: (err) => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询pages 记录失败' + err
-        })
       }
-    })
-
-    db.collection('comments').where({
-      page_id: options.page_id
-    }).get({
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          commentCount: res.data.length,
-          comments: res.data
-        })
-      },
-      fail: (err) => {
-        wx.showToast({
-          icon: 'none',
-          title: '查询comments 记录失败' + err
-        })
-      }
-
     })
   },
   viewComment: function () {
@@ -103,13 +78,15 @@ Page({
       return 
     }
     this.setData({
-      showComments: true
+      showComments: true,
+      commentContent: this.data.comments[this.data.commentIndex].comment_content
     })
   },
   closeComment: function () {
     console.log(arguments);
     this.setData({
-      showComments: false
+      showComments: false,
+      commentContent: ''
     })
   },
 
@@ -174,28 +151,29 @@ Page({
         url: '../myBook/myBook'
       })
     } else if (action == 'LEFT') {
-      if (pageIndex - 1 > 0){
+      if (this.data.pageIndex - 1 >= 0){
+        this.onLoadPage(this.data.pages[this.data.pageIndex - 1])
         this.setData({
-          pageIndex: pageIndex - 1,
-          pageContent: pages[pageIndex].page_content
+          pageIndex: this.data.pageIndex - 1
         })
       }
     } else if (action == 'RIGHT') {
-      if (pageIndex + 1 > pages.length - 5) {
+      if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
         db.collection('pages').where({
           _openid: getApp().globalData.openid
         }).orderBy('publish_time', 'desc')
-        .skip(pages.length).get().then(res => {
+          .skip(this.data.pages.length).get().then(res => {
           console.log(res)
           this.setData({ 
-            pages: pages.concat(res.data)
+            pages: this.data.pages.concat(res.data)
           })
         })
       }
-      if (pageIndex + 1 < pages.length) {
+      
+      if (this.data.pageIndex + 1 < this.data.pages.length) {
+        this.onLoadPage(this.data.pages[this.data.pageIndex + 1])
         this.setData({
-          pageIndex: pageIndex + 1,
-          pageContent: pages[pageIndex].page_content
+          pageIndex: this.data.pageIndex + 1
         })
       }
     }
@@ -212,15 +190,15 @@ Page({
     if (action === 'LEFT') {
       if (commentIndex + 1 < comment.length) {
         this.setData({
-          commentIndex: commentIndex + 1,
-          commentContent: comments[commentIndex].comment_content
+          commentIndex: this.data.commentIndex + 1,
+          commentContent: this.data.comments[this.data.commentIndex + 1].comment_content
         })
       }
     } else if (action == 'RIGHT') {
       if (commentIndex - 1 > 0) {
         this.setData({
-          commentIndex: commentIndex - 1,
-          commentContent: comments[commentIndex].comment_content
+          commentIndex: this.data.commentIndex - 1,
+          commentContent: this.data.comments[this.data.commentIndex - 1].comment_content
         })
       }
     }
