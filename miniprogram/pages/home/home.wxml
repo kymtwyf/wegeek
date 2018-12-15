@@ -1,8 +1,8 @@
 <!--miniprogram/home/home.wxml-->
 <view class="page-body {{showWelcome ? '':'show'}}">
-  <navigator url="../index/index" open-type="navigate" class="">
-      <text>go guide</text>
-  </navigator>
+  <view class='tabar' style='margin-top:{{bar_Height}}px;'>
+    <view>时锦</view>
+  </view>
   <view class="text-wrapper">
     <image class="background" src="../../images/home-bg@2x.png"/>
     <textarea

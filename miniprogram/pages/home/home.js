@@ -13,6 +13,7 @@ Page({
   data: {
     showWelcome: true,
     currentText: '',
+    bar_Height: wx.getSystemInfoSync().statusBarHeight
   },
 
   streamRecord: function () {
@@ -113,7 +114,7 @@ Page({
       _this.setData({
         showWelcome: false
       })
-    }, 3000);
+    }, 1000);
   },
 
   /**
