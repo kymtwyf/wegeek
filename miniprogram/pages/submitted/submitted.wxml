@@ -29,9 +29,9 @@
   <cover-view wx:if="{{ showComments }}"
     class="comments-container">
 
-    <view class="close-btn" bind:tap="closeComment">
+    <cover-view class="close-btn" bind:tap="closeComment">
       关闭
-    </view>
+    </cover-view>
     aaa
   </cover-view>
 
