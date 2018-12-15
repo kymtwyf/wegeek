@@ -13,10 +13,15 @@ Page({
   data: {
     showWelcome: true,
     currentText: '',
-    bar_Height: wx.getSystemInfoSync().statusBarHeight
+    bar_Height: wx.getSystemInfoSync().statusBarHeight,
+    setSubmit:false,
+    setRecord:false
   },
 
   streamRecord: function () {
+    this.setData({
+      setRecord: true,
+    })
     manager.start({
       lang: 'zh_CN',
     })
@@ -24,6 +29,9 @@ Page({
 
   streamRecordEnd: function () {
     manager.stop()
+    this.setData({
+      setRecord: false,
+    })
   },
 
   initRecord: function () {
@@ -31,7 +39,7 @@ Page({
     manager.onRecognize = (res) => {
       let text = res.result
       this.setData({
-        currentText: this.data.currentText + "\n" + text,
+        currentText: this.data.currentText + "\n" + text
       })
     }
     // 识别结束事件
@@ -55,12 +63,15 @@ Page({
       })
       return
     }
+    this.setData({
+      setSubmit: true
+    })      
     console.log("start to submit data" + this.data.currentText)
     db.collection("pages").add({
       data: {
         page_content: this.data.currentText,
         publish_time: Date.parse(new Date())/1000
-      }
+      },
     })
     .then(res => {
       console.log(res)
@@ -68,6 +79,9 @@ Page({
       wx.navigateTo({
         url: '../submitted/submitted?page_id=' + page_id
       })
+      this.setData({
+        setSubmit: false
+      })  
       // db.collection("user_info").add({
       //   data: {
       //     page_id: page_id
