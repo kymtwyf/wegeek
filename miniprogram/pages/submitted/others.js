@@ -4,7 +4,7 @@ const manager = plugin.getRecordRecognitionManager()
 // 获取数据库引用
 const db = wx.cloud.database()
 import { getSlideDirection } from '../utils';
-
+const app = getApp();
 function currentDate() {
   var date = new Date();
   var y = date.getFullYear();
@@ -48,7 +48,12 @@ Page({
     pages: [],
     color: undefined,
     fromPage: 'desc',
-    reverse: 'desc'
+    reverse: 'desc',
+
+    exclude: [],
+    othersOpenId: undefined,
+    viewAllOthers: true,
+    currentPage: undefined
   },
 
   onLoadPage: function (page) {
@@ -58,6 +63,7 @@ Page({
     }).get().then(res => {
       console.log(res)
       this.setData({
+        currentPage: page, 
         commentCount: res.data.length,
         comments: res.data,
         color: page.color,
@@ -72,27 +78,34 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
-    this.setData({
-      fromPage: options.from_uri,
-      reverse: options.reverse
-    })
+    console.log('onLoad')
+    // console.log(options)
+    // this.setData({
+    //   fromPage: options.from_uri,
+    //   reverse: options.reverse
+    // })
     const db = wx.cloud.database()
-    console.log(getApp().globalData.openid)
-    db.collection('pages').where({
-      _openid: getApp().globalData.openid
-    }).orderBy('publish_time', this.data.reverse).get({
-      success: (res) => {
-        console.log(res)
-        this.setData({
-          pages: res.data,
-          pageIndex: 0
-        })
-        this.onLoadPage(res.data[0])
+    wx.cloud.callFunction({
+      name: 'dispatchPages',
+      data: {
+        openid: this.data.othersOpenId || app.globalData.openid,
+        exclude: this.data.exclude
       },
-      fail: (err) => {
+      success: res => {
+        console.log('dispatched pages')
+        console.log(res)
+        var result = JSON.parse(res.result)
+        this.data.pages = result
+        this.data.pageIndex = 0
+        // 我们看过之后再加 exclude
+        // for (var i = 0; i < result.length; i++) {
+        //   console.log(result[i])
+        //   this.data.exclude.push(result[i]._id)
+        // }
+        // console.log(this.data.exclude)
+        this.onLoadPage(result[0])
       }
-    })
+    });
   },
   backHome: function () {
     if (this.data.fromPage == "root") {
@@ -175,11 +188,12 @@ Page({
   onTouchEnd: function (event) {
     let touchEnd = event.changedTouches[0];
     let action = getSlideDirection(this.data.touchStart, touchEnd);
-    if (action === 'UP') {
-      console.log('go my book page')
-      wx.navigateTo({
-        url: '../myBook/myBook'
+    if (action === 'UP' && !this.data.viewAllOthers) {
+      this.setData({
+        viewAllOthers: true,
+        othersOpenId: ''
       })
+      this.onLoad()
     } else if ((action == 'LEFT' && this.data.reverse == "desc") || (action == 'RIGHT' && this.data.reverse == 'asc')) {
       console.log(this.data.fromPage)
       if (this.data.pageIndex - 1 >= 0){
@@ -206,6 +220,10 @@ Page({
       }
       
       if (this.data.pageIndex + 1 < this.data.pages.length) {
+        // 看过 pageIndex 这一页了
+        this.data.exclude.push(this.data.pages[this.data.pageIndex]._id)
+        console.log(this.data.exclude)
+
         this.onLoadPage(this.data.pages[this.data.pageIndex + 1])
         this.setData({
           pageIndex: this.data.pageIndex + 1
@@ -243,7 +261,19 @@ Page({
   },
   goOthersPages: function () {
     wx.navigateTo({
-      url: './others'
+      url: '../others/pages'
     })
+  },
+  goViewOnes: function () {
+    if (this.data.viewAllOthers) {
+      this.setData({
+        othersOpenId: this.data.currentPage ? this.data.currentPage._openid : undefined,
+        viewAllOthers: false
+      })
+
+      this.onLoad()
+    } else {
+      console.log(' you are viewing ' + this.data.othersOpenId +  '\'s pages');
+    }
   }
 })

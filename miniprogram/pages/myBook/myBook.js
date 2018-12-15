@@ -64,8 +64,11 @@ Page({
 
   },
   goMyBook () {
-    wx.navigateTo({
-      url: '../submitted/submitted?reverse=asc&from_uri=mine'
+    // wx.navigateTo({
+    //   url: '../submitted/submitted?reverse=asc&from_uri=mine'
+    // })
+    wx.navigateBack({
+      delta: 1
     })
   }
 })

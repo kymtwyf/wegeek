@@ -1,0 +1,193 @@
+/* miniprogram/home/home.wxss */
+.tabar {
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 38rpx;
+  color: white;
+  background-color:transparent;
+}
+  
+.tabar view {
+  padding: 25rpx 0rpx;
+}
+.page-body {
+  overflow: hidden;
+  height: 100%;
+  background:linear-gradient(-45deg,rgba(133,140,124,1),rgba(176,184,169,1));
+  transition: all 2s ease-in;
+  opacity: 0;
+  display: none;
+}
+.page-body.show {
+  opacity: 1;
+  display: block;
+}
+
+.text-wrapper {
+  z-index: 1;
+  margin-top: 54rpx;
+  box-sizing: border-box;
+  padding: 110rpx 100rpx;
+  width: 738rpx;
+  height: 870rpx;
+  position: relative;
+}
+.text-wrapper > .background {
+  width: 100%;
+  height: 100%;
+
+  position: absolute;
+  top: 0;
+  left: 0;
+  z-index: -1;
+}
+.text-wrapper .comment-status {
+  position: absolute;
+  right: 20rpx;
+  bottom: 100rpx;
+
+  width: 298rpx;
+  height: 60rpx;
+
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(248,248,248,1);
+  border-radius: 30rpx 0rpx 0rpx 30rpx;  
+}
+.text-wrapper > .back-to-home {
+  position: absolute;
+  left: 88rpx;
+  top: 0;
+
+  width: 80rpx;
+  height: 74rpx;
+}
+.text {
+  font-size: 28rpx;
+  color: rgba(51, 51, 51, 1)
+}
+
+.buttons {
+  position: absolute;
+  bottom: 142rpx;
+
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  text-align: center;
+}
+
+.buttons > .button-watch-others {
+  width:686rpx;
+  height: 88rpx;
+  background:rgba(255,255,255,1);
+  border-radius: 44rpx;
+
+  line-height: 88rpx;
+  font-size: 36rpx;
+  color: rgba(51, 51, 51, 1);
+}
+
+.welcome {
+  width: 100%;
+  height: 100%;
+  position: fixed;
+  z-index: 1000;
+  top: 0;
+  left: 0;
+  background-color: #f2f2f2;
+
+  transition: all 1s ease;
+}
+
+.welcome.hide {
+  opacity: 0;
+  z-index: -1000;
+}
+
+.welcome >.icons {
+  position: fixed;
+  bottom: 278rpx;
+  left: calc(50% - 107rpx);
+
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.welcome > .icons > .shijin {
+  width: 168rpx;
+  height: 168rpx;
+  margin-bottom: 48rpx;
+}
+
+.welcome > .icons > .shijin-text {
+  width: 118rpx;
+  height: 60rpx;
+  margin-bottom: 22rpx;
+}
+
+.welcome > .icons > .shijin-slogon {
+  width: 214rpx;
+  height: 28rpx;
+}
+
+.hint-text {
+  color: white;
+  font-size: 30rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 30rpx;
+  text-align: center;
+}
+
+/** commends **/
+.comments-container {
+    background-color: rgba(0, 0, 0, .7);
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 10;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.comments-container > .comments {
+  width: 738rpx;
+  height: 850rpx;
+  position: relative;
+  padding: 114rpx 88rpx;
+  box-sizing: border-box;
+}
+
+.comments-container > .comments > .background {
+  width: 100%;
+  height: 100%;
+  position: absolute;
+  left: 0;
+  top: 0;
+}
+
+.comments-container > .comments > .back-to-home {
+  width: 70rpx;
+  height: 66rpx;
+  position: absolute;
+  top: 0;
+  left: 86rpx;
+
+}
+
+.comments-container > .comments > .text {
+  font-size: 28rpx;
+  color: rgba(51, 51, 51, 1);
+  /* position:  */
+}
