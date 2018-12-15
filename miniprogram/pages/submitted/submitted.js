@@ -5,6 +5,27 @@ const manager = plugin.getRecordRecognitionManager()
 const db = wx.cloud.database()
 import { getSlideDirection } from '../utils';
 
+function currentDate() {
+  var date = new Date();
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? ('0' + m) : m;
+  var d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  return y + '年' + m + '月' + d + '日';
+};
+
+function formatDateTime(timeStamp) {
+  var date = new Date();
+  date.setTime(timeStamp * 1000);
+  var y = date.getFullYear();
+  var m = date.getMonth() + 1;
+  m = m < 10 ? ('0' + m) : m;
+  var d = date.getDate();
+  d = d < 10 ? ('0' + d) : d;
+  return y + '年' + m + '月' + d + '日';
+};
+
 Page({
 
   /**
@@ -41,7 +62,7 @@ Page({
         comments: res.data,
         color: page.color,
         likeCount: page.likes,
-        pageContent: page.page_content
+        pageContent: page.page_content + '\n\t\t\t\t\t' + currentDate() 
       })
     }).catch(err => {
     })
