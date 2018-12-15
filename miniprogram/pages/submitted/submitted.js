@@ -12,28 +12,51 @@ Page({
    */
   data: {
     showWelcome: false,
-    currentText: '',
-    bar_Height: wx.getSystemInfoSync().statusBarHeight
+    bar_Height: wx.getSystemInfoSync().statusBarHeight,
+    pageId: '',
+    pageContent: '',
+    likeCount: 123,
+    commentCount: 234,
+    showComments: false
   },
 
-  bindEquipmentId: function (e) {
-    this.setData({
-      currentText: e.detail.value
-    })
-  },
-
-  bindTextAreaBlur: function (e) {
-    console.log(e.detail.value)
-    this.setData({
-      currentText: e.detail.value,
-    })
-  },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    this.initRecord()
+    console.log(options.page_id)
+    this.setData({
+      pageId: options.page_id
+    })
+    const db = wx.cloud.database()
+    db.collection('pages').where({
+      _id: options.page_id
+    }).get({
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          pageContent: res.data[0].page_content
+        })
+      },
+      fail: (err) => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询pages 记录失败' + err
+        })
+      }
+    })
+  },
+  viewComment: function () {
+    console.log('catch tap')
+    this.setData({
+      showComments: true
+    })
+  },
+  closeComment: function () {
+    this.setData({
+      showComments: false
+    })
   },
 
   /**
