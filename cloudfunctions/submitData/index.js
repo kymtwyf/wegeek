@@ -15,10 +15,14 @@ var color_map = {
 }
 
 function get_color(chunk) {
-  if (chunk['ret'] == 0) {
-    var polar = chunk['data']['polar'];
-    var confd = chunk['data']['confd'];
+  console.log("in get_color");
+  console.log("print chunk");
+  console.log(chunk['msg']);
+  if (chunk['msg'] == "ok") {
+    var polar = parseFloat(chunk['data']['polar']);
+    var confd = parseFloat(chunk['data']['confd']);
     if (polar != 0) {
+      console.log("oops");
       if (polar == 1) {
         if (confd > 0.8) {
           return { 'color': color_map['3'] };
@@ -87,12 +91,11 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
     res.setEncoding('utf8');
     res.on('data', function (chunk) {
       console.log('BODY: ' + chunk);
-      console.log(text);
-      let color_json = get_color(chunk);
+      let color_json = get_color(JSON.parse(chunk));
       //resolve(JSON.stringify(chunk));
       db.collection("pages").add({
         data: {
-          "_openid": event.openid,
+          _openid: event.openid,
           page_content: event.page_content,
           publish_time: event.publish_time,
           color: color_json.color,
@@ -102,7 +105,6 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
       .then(res => {
         console.log(chunk);
         console.log(res);
-        let tmp = get_color(chunk);
         data = {'_id': res._id, 'color': color_json.color}
         resolve(JSON.stringify(data));
       })
