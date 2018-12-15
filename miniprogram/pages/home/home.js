@@ -86,30 +86,6 @@ Page({
       }
     });
     return;
-    db.collection("pages").add({
-      data: {
-        page_content: this.data.currentText,
-        publish_time: Date.parse(new Date())/1000
-      },
-    })
-    .then(res => {
-      console.log(res)
-      let page_id = res['_id']
-      wx.navigateTo({
-        url: '../submitted/submitted?page_id=' + page_id
-      })
-      this.setData({
-        setSubmit: false
-      })  
-      // db.collection("user_info").add({
-      //   data: {
-      //     page_id: page_id
-      //   },
-      //   success(res) {
-      //     console.log(res)
-      //   }
-      // })
-    })
   },
 
   bindEquipmentId: function (e) {
