@@ -174,5 +174,10 @@ Page({
   },
   doNothing: function () {
     console.log('do nothing')
+  },
+  goOthersPages: function () {
+    wx.navigateTo({
+      url: '../others/pages'
+    })
   }
 })

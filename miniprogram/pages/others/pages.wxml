@@ -1,0 +1,27 @@
+<!--miniprogram/pages/others/pages.wxml-->
+<view class="page-body" 
+    bind:touchstart="onTouchStart"
+    bind:touchend="onTouchEnd">
+  <view class='tabar' style='margin-top:{{bar_Height}}px;'>
+    <view>别人的书页</view>
+  </view>
+
+  <view class="pages-container" catch:tap="tapped">
+    <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
+    <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
+    <textarea
+      class="text"
+      value="{{pageContent}}"
+      disabled=true
+    />
+    <view class="comments-area" wx:if="{{ canCommentLike }}">
+    
+    </view>
+  </view>
+
+  <view class="my-book-container">
+    <view class="my-book">
+        我的书
+    </view>
+  </view>
+</view>

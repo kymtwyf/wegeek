@@ -11,8 +11,8 @@
     "pages/home/touchEvent",
     "pages/home/welcome",
     "pages/submitted/submitted",
-    "pages/myBook/myBook"
-    
+    "pages/myBook/myBook",
+    "pages/others/pages"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

@@ -25,5 +25,5 @@ page > .page-body > .tabar view {
 
 
 textarea.text {
-  height: 440rpx;
+  height: 480rpx;
 }
