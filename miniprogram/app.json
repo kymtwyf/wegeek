@@ -8,7 +8,8 @@
     "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib",
     "pages/home/home",
-    "pages/home/touchEvent"
+    "pages/home/touchEvent",
+    "pages/home/welcome"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",

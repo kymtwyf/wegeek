@@ -50,6 +50,7 @@ Page({
 
   onGetUserInfo: function(e) {
     if (!this.logged && e.detail.userInfo) {
+      console.log(e)
       this.setData({
         logged: true,
         avatarUrl: e.detail.userInfo.avatarUrl,
@@ -64,6 +65,7 @@ Page({
       name: 'login',
       data: {},
       success: res => {
+        console.log(res);
         console.log('[云函数] [login] user openid: ', res.result.openid)
         app.globalData.openid = res.result.openid
         wx.navigateTo({
