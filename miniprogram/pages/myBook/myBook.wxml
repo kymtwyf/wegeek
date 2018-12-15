@@ -1,0 +1,9 @@
+<!--miniprogram/pages/myBook/myBook.wxml-->
+<view class="page-body">
+  <view class='tabar' style='margin-top:{{bar_Height}}px;'>
+    <view>我的书</view>
+  </view>
+  <view class="book-wrapper">
+    <image class="book" src="../../images/book@2x.png"/>
+  </view>
+</view>
