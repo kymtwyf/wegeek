@@ -1,6 +1,6 @@
 <!--miniprogram/pages/test/test.wxml-->
 <view class='tabar' style='top:{{bar_Height}}px;'>
-  <view>个人中心</view>
+  <view>时锦</view>
 </view>
 <view>
 

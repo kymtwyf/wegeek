@@ -1,7 +1,4 @@
 /* miniprogram/pages/test/test.wxss */
-page {
-  background: #dba6a6
-}
 .card-con-right image{
   width: 26px;
   height: 26px;
@@ -13,7 +10,7 @@ page {
   position: fixed;
   text-align: center;
   font-size: 12pt;
-  color: #6cbc72;
+  color: #000000;
   background-color:transparent;
 }
 
