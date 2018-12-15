@@ -23,7 +23,7 @@ Page({
     showComments: false,
     touchStart: undefined,
     commentsTouchStart: undefined,
-    commentContent: 'abc'
+    commentContent: ''
   },
 
 
@@ -157,11 +157,20 @@ Page({
     let touchEnd = event.changedTouches[0];
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     if (action === 'LEFT') {
-      // TODO change comment contnt
-      this.setData({
-        commentContent: new Date()
-      })
-    } 
+      if (commentIndex + 1 < comment.length) {
+        this.setData({
+          commentIndex: commentIndex + 1,
+          commentContent: comments[commentIndex].comment_content
+        })
+      }
+    } else if (action == 'RIGHT') {
+      if (commentIndex - 1 > 0) {
+        this.setData({
+          commentIndex: commentIndex - 1,
+          commentContent: comments[commentIndex].comment_content
+        })
+      }
+    }
   },
   doNothing: function () {
     console.log('do nothing')
