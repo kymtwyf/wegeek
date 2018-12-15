@@ -55,14 +55,17 @@ Page({
     .then(res => {
       console.log(res)
       let page_id = res['_id']
-      db.collection("user_info").add({
-        data: {
-          page_id: page_id
-        },
-        success(res) {
-          console.log(res)
-        }
+      wx.navigateTo({
+        url: '../submitted/submitted?page_id=' + page_id
       })
+      // db.collection("user_info").add({
+      //   data: {
+      //     page_id: page_id
+      //   },
+      //   success(res) {
+      //     console.log(res)
+      //   }
+      // })
     })
   },
 

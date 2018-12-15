@@ -9,7 +9,8 @@
     "pages/deployFunctions/deployFunctions",
     "pages/chooseLib/chooseLib",
     "pages/home/touchEvent",
-    "pages/home/welcome"
+    "pages/home/welcome",
+    "pages/submitted/submitted"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
