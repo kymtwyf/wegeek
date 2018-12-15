@@ -1,7 +1,7 @@
 <!--miniprogram/home/home.wxml-->
 <view class="page-body {{showWelcome ? '':'show'}}"
-  catch:touchstart="onTouchStart"
-  catch:touchend="onTouchEnd">
+  bind:touchstart="onTouchStart"
+  bind:touchend="onTouchEnd">
   <view class='tabar' style='margin-top:{{bar_Height}}px;'>
     <view>时锦</view>
   </view>
@@ -9,7 +9,6 @@
     <image class="background" src="../../images/home-bg@2x.png"/>
     <image class="back-to-home" src="../../images/back-to-home@2x.png"/>
     <textarea
-      disabled= false
       class="text"
       value="{{pageContent}}"
       disabled=true
@@ -20,8 +19,8 @@
       <view class="like-count">
         {{ likeCount }}
       </view>
-      <i class="" bind:tap="viewComment"/>
-      <view class="comment-count" bind:tap="viewComment">
+      <i class="" catch:tap="viewComment"/>
+      <view class="comment-count" catch:tap="viewComment">
         {{ commentCount }}
       </view>
     </view>
@@ -35,11 +34,19 @@
     </view>
   </view>
 
-  <cover-view wx:if="{{ showComments }}"
-    class="comments-container">
-    <cover-view class="close-btn" bind:tap="closeComment">
-      关闭
-    </cover-view>
-    aaa
-  </cover-view>
+  <view wx:if="{{ showComments }}"
+    class="comments-container" catch:tap="closeComment">
+    <view class="comments" bind:touch="onCommentsTouchStart"
+      bind:touchend="onCommentsTouchEnd"
+      catch:tap="doNothing"
+      data-id="123">
+      <image class="background" 
+        src="../../images/comments-bg@2x.png"/>
+      <textarea
+        class="text"
+        value="{{commentContent}}"
+        disabled=true
+        />
+    </view>
+  </view>
 </view>

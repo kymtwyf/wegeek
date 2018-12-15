@@ -19,7 +19,9 @@ Page({
     likeCount: 123,
     commentCount: 234,
     showComments: false,
-    touchStart: undefined
+    touchStart: undefined,
+    commentsTouchStart: undefined,
+    commentContent: 'abc'
   },
 
 
@@ -29,11 +31,11 @@ Page({
   onLoad: function (options) {
     console.log(options.page_id)
     this.setData({
-      pageId: options.page_id
+      pageId: options.page_id || 'XBUU0MDR1TiN3wnr'
     })
     const db = wx.cloud.database()
     db.collection('pages').where({
-      _id: options.page_id
+      _id: options.page_id || 'XBUU0MDR1TiN3wnr'
     }).get({
       success: (res) => {
         console.log(res)
@@ -50,12 +52,13 @@ Page({
     })
   },
   viewComment: function () {
-    console.log('catch tap')
+    console.log('view comments')
     this.setData({
       showComments: true
     })
   },
   closeComment: function () {
+    console.log(arguments);
     this.setData({
       showComments: false
     })
@@ -122,5 +125,24 @@ Page({
         url: '../myBook/myBook'
       })
     }
+  },
+  onCommentsTouchStart: function (event) {
+    console.log(tapStart)
+    this.setData({
+      onCommentsTouchStart: event.touches[0]
+    })
+  },
+  onCommentsTouchEnd: function (event) {
+    let touchEnd = event.changedTouches[0];
+    let action = getSlideDirection(this.data.touchStart, touchEnd);
+    if (action === 'LEFT') {
+      // TODO change comment contnt
+      this.setData({
+        commentContent: new Date()
+      })
+    } 
+  },
+  doNothing: function () {
+    console.log('do nothing')
   }
 })
