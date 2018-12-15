@@ -94,7 +94,8 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
         data: {
           page_content: event.page_content,
           publish_time: event.publish_time,
-          color: color_json.color
+          color: color_json.color,
+          likes: 0
         },
       })
       .then(res => {
