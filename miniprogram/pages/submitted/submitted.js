@@ -73,6 +73,13 @@ Page({
       }
     })
   },
+  backHome: function () {
+    if (this.data.fromPage == "root") {
+      wx.navigateBack({
+        delta: 1
+      });
+    }
+  },
   viewComment: function () {
     console.log('view comments')
     if (this.data.commentCount === 0) {
@@ -195,14 +202,14 @@ Page({
     let touchEnd = event.changedTouches[0];
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     if (action === 'LEFT') {
-      if (commentIndex + 1 < comment.length) {
+      if (this.data.commentIndex + 1 < comment.length) {
         this.setData({
           commentIndex: this.data.commentIndex + 1,
           commentContent: this.data.comments[this.data.commentIndex + 1].comment_content
         })
       }
     } else if (action == 'RIGHT') {
-      if (commentIndex - 1 > 0) {
+      if (this.data.commentIndex - 1 > 0) {
         this.setData({
           commentIndex: this.data.commentIndex - 1,
           commentContent: this.data.comments[this.data.commentIndex - 1].comment_content

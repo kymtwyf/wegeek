@@ -8,7 +8,7 @@
   </view>
   <view class="text-wrapper">
     <image class="background" src="../../images/home-bg@2x.png"/>
-    <image class="back-to-home" src="../../images/back-to-home@2x.png"/>
+    <image class="back-to-home" src="../../images/back-to-home@2x.png" catch:tap="backHome"/>
     <textarea
       class="text"
       value="{{pageContent}}"
