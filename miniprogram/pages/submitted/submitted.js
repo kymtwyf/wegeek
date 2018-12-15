@@ -1,5 +1,4 @@
 // miniprogram/home/home.js
-const app = getApp()
 const plugin = requirePlugin("WechatSI")
 const manager = plugin.getRecordRecognitionManager()
 // 获取数据库引用
@@ -33,15 +32,15 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    const app = getApp()
     console.log(options.page_id)
     this.setData({
       // TODO
-      pageId: options.page_id || 'XBUU0MDR1TiN3wnr'
+      pageId: options.page_id
     })
     const db = wx.cloud.database()
+    console.log(getApp().globalData.openid)
     db.collection('pages').where({
-      _openid: app.globalData.openid
+      _openid: getApp().globalData.openid
     }).orderBy('publish_time', 'desc').get({
       success: (res) => {
         console.log(res)
