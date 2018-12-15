@@ -9,8 +9,8 @@
       <view class="like-count">
         {{ likeCount }}
       </view>
-      <view class="comment-count">
-        {{ commentCount }}
+      <view class="comment-count" bind:tap="viewComment">
+        我是评论数，点我{{ commentCount }}
       </view>
     </view>
   </view>
@@ -25,4 +25,14 @@
       btn 我的时锦
     </view>
   </view>
+
+  <cover-view wx:if="{{ showComments }}"
+    class="comments-container">
+
+    <view class="close-btn" bind:tap="closeComment">
+      关闭
+    </view>
+    aaa
+  </cover-view>
+
 </view>

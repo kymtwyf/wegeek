@@ -8,7 +8,8 @@ Page({
     pageId: '',
     pageContent: '',
     likeCount: 123,
-    commentCount: 234
+    commentCount: 234,
+    showComments: false
   },
 
   /**
@@ -85,5 +86,17 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+
+  viewComment: function () {
+    console.log('catch tap')
+    this.setData({
+      showComments: true
+    })
+  },
+  closeComment: function () {
+    this.setData({
+      showComments: false
+    })
   }
 })
