@@ -7,4 +7,17 @@ page > .page-body {
   height: 100%;
 }
 
+page > .page-body >.tabar {
+  
+  width: 100%;
+  box-sizing: border-box;
+  text-align: center;
+  font-size: 38rpx;
+  color: white;
+  background-color:transparent;
+}
+
+page > .page-body > .tabar view {
+  padding: 25rpx 0rpx;
+}
 /* @import 'style/iconfont.wxss'; */
