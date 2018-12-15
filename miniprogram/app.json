@@ -16,5 +16,11 @@
     "navigationBarBackgroundColor": "#F6F6F6",
     "navigationBarTitleText": "云开发 QuickStart",
     "navigationBarTextStyle": "black"
+  },
+  "plugins": {
+    "WechatSI": {
+      "version": "0.2.2",
+      "provider": "wx069ba97219f66d99"
+    }
   }
 }
