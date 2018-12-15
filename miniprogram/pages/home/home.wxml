@@ -19,4 +19,12 @@
     提交
     </view>
   </view>
+
+<view class="welcome {{showWelcome ? 'show':'hide'}}">
+  <view class="icons">
+    <image class="shijin" src="../../images/logo@2x.png"/>
+    <image class="shijin-text" src="../../images/时锦@2x.png"/>
+    <image class="shijin-slogon" src="../../images/每个人都是一本书@2x.png"/>
+  </view>
+</view>
 </view>
