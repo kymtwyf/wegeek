@@ -47,6 +47,13 @@ Page({
   },
 
   submitData: function() {
+    if (!this.data.currentText || this.data.currentText.length === 0) {
+      wx.showToast({
+        title: '此时锦言胜无言',
+        icon: 'none'
+      })
+      return
+    }
     console.log("start to submit data" + this.data.currentText)
     db.collection("pages").add({
       data: {

@@ -4,6 +4,7 @@
       <text>go guide</text>
   </navigator>
   <view class="text-wrapper">
+    <image class="background" src="../../images/home-bg@2x.png"/>
     <textarea
       class="text"
       placeholder="语不惊人死不休"
