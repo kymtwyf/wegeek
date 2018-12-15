@@ -35,14 +35,39 @@ def init_db():
     return database
 
 '''
+Check whether the event is valid
+'''
+def event_valid(evt_obj):
+    if "type" not in evt_obj:
+        return False
+
+    if evt_obj["type"] not in ["submit", "like", "view", "comment"]:
+        return False
+    
+    if evt_obj["type"] == "submit":
+        if "page_content" not in evt_obj:
+            return False
+        elif evt_obj["page_content"].strip() == "":
+            return False
+    return True
+
+'''
 Save the event to db
 '''
-def save_to_db(open_id, evt_obj, db):
-    evt_obj["time"] = time.time()
-    evt_obj["handled"] = False
-    evt_obj["trigger"] = open_id
+def save_to_db(open_id, evt_list, db):
+    to_save = []
+    for evt_obj in evt_list:
+        if not event_valid(evt_obj):
+            logging.debug("Event not valid, %s", evt_obj)
+            continue
+        
+        evt_obj["time"] = time.time()
+        evt_obj["handled"] = False
+        evt_obj["trigger"] = open_id
+        to_save.append(evt_obj)
+
     events = db.user_events
-    events.save(evt_obj)
+    events.insert(to_save)
 
 '''
 Main Entry
@@ -52,16 +77,16 @@ def main_handler(event, context):
     #logging.info("Received context: " + str(context))
 
     open_id = None
-    evt_obj = None
+    evt_list = None
     try:
         open_id = event["headerParameters"]["openid"]
         body = get_ulr_params(event["body"])
-        evt_obj = body["event"]
+        evt_list = body["event"]
     except:
         logging.exception("failed to get enough parameters")
         raise Exception("failed to get enough parameters")
 
-    logging.debug("openid in %s, event %s", open_id, evt_obj)
+    logging.debug("openid in %s, event %s", open_id, evt_list)
 
     try:
         db = init_db()
@@ -71,7 +96,7 @@ def main_handler(event, context):
         raise Exception("failed to load mongo")
     
     try:
-        save_to_db(open_id, evt_obj, db)
+        save_to_db(open_id, evt_list, db)
     except:
         logging.exception("failed to save to db")
         raise Exception("failed to save to db")

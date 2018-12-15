@@ -23,13 +23,38 @@ def init_db():
     return database
 
 '''
+Check whether the event is valid
+'''
+def event_valid(evt_obj):
+    if "type" not in evt_obj:
+        return False
+
+    if evt_obj["type"] not in ["submit", "like", "view", "comment"]:
+        return False
+    
+    if evt_obj["type"] == "submit":
+        if "page_content" not in evt_obj:
+            return False
+        elif evt_obj["page_content"].strip() == "":
+            return False
+    return True
+
+'''
 Query from db where the 'handled' is not set
 '''
 def query_from_db(db):
     events = db.user_events
     results = []
+    to_remove = []
     for e in events.find({"handled" : False}):
-        results.append(e)
+        if not event_valid(e):
+            to_remove.append(e)
+        else:
+            results.append(e)
+    
+    if to_remove:
+        events.remove(to_remove, multi=True)
+    
     return results
 
 '''
