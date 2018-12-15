@@ -31,17 +31,17 @@ Init mongodb connection
 def init_db():
     url = load_config("mongo.url")
     client = pymongo.MongoClient(url)
-    return client
+    database = client.wegeek
+    return database
 
 '''
 Save the event to db
 '''
 def save_to_db(open_id, evt_obj, db):
-    # create at the first time
-    database = db.wegeek
     evt_obj["time"] = time.time()
-    evt_obj["handled"] = False 
-    events = database.user_events
+    evt_obj["handled"] = False
+    evt_obj["trigger"] = open_id
+    events = db.user_events
     events.save(evt_obj)
 
 '''
