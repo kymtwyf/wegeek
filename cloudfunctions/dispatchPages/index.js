@@ -11,7 +11,8 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
   const _ = db.command
   console.log('openid=' + event.openid)
   db.collection('pages').where({
-    _openid: _.neq(event.openid)
+    _openid: _.neq(event.openid),
+    _id: _.nin(event.exclude)
   }).orderBy('publish_time', 'desc')
     .limit(20)
     .get()

@@ -39,11 +39,7 @@ Page({
   initRecord: function () {
     //有新的识别内容返回，则会调用此事件
     manager.onRecognize = (res) => {
-      let text = res.result
-      
-      this.setData({
-        currentText: this.data.currentText + "\n" + text
-      })
+
     }
     // 识别结束事件
     manager.onStop = (res) => {
