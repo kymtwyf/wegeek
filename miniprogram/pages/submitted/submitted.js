@@ -16,10 +16,10 @@ Page({
     bar_Height: wx.getSystemInfoSync().statusBarHeight,
     pageId: '',
     pageContent: '',
-    likeCount: 123,
-    commentCount: 234,
+    likeCount: 0,
+    commentCount: 0,
     showComments: false,
-    touchStart: undefined
+    touchStart: undefined,
   },
 
 
