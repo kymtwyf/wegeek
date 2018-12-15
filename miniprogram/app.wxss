@@ -22,3 +22,8 @@ page > .page-body > .tabar view {
   padding: 25rpx 0rpx;
 }
 /* @import 'style/iconfont.wxss'; */
+
+
+textarea.text {
+  height: 440rpx;
+}
