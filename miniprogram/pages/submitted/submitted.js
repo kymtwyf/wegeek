@@ -171,6 +171,31 @@ Page({
       wx.navigateTo({
         url: '../myBook/myBook'
       })
+    } else if (action == 'LEFT') {
+      if (pageIndex - 1 > 0){
+        this.setData({
+          pageIndex: pageIndex - 1,
+          pageContent: pages[pageIndex].page_content
+        })
+      }
+    } else if (action == 'RIGHT') {
+      if (pageIndex + 1 > pages.length - 5) {
+        db.collection('pages').where({
+          _openid: getApp().globalData.openid
+        }).orderBy('publish_time', 'desc')
+        .skip(pages.length).get().then(res => {
+          console.log(res)
+          this.setData({ 
+            pages: pages.concat(res.data)
+          })
+        })
+      }
+      if (pageIndex + 1 < pages.length) {
+        this.setData({
+          pageIndex: pageIndex + 1,
+          pageContent: pages[pageIndex].page_content
+        })
+      }
     }
   },
   onCommentsTouchStart: function (event) {
