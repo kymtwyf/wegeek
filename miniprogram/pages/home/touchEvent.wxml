@@ -12,4 +12,10 @@
         {{ index }}
     </view>
   </view>
+  <button bind:tap="tap">
+    点一下
+  </button>
+  <view class="block {{activeStatus}}">
+    abc
+  </view>
 </view>

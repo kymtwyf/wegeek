@@ -9,6 +9,7 @@ Page({
     startY: 0,
     action: '',
     activeIndex: 0,
+    activeStatus: 'inactive',
     list: [{
       text: '1'
     }, {
@@ -110,6 +111,11 @@ Page({
     this.setData({
       action: action,
       activeIndex: activeIndex
+    })
+  },
+  tap () {
+    this.setData({
+      activeStatus: 'active'
     })
   }
 })

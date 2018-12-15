@@ -11,3 +11,13 @@
 .book.active {
   color: red;
 }
+.block {
+  transition: all 10s;
+}
+.inactive {
+  opacity: 0;
+
+}
+.active {
+  opacity: 1
+}
