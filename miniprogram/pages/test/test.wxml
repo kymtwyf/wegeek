@@ -1,0 +1,20 @@
+<!--miniprogram/pages/test/test.wxml-->
+<!-- <text>miniprogram/pages/test/test.wxml</text> -->
+<view catchtap='onCollectionTap' class= "card-con-right">
+  <image  src="../test/{{agree?'wish2.png':'wish1.png'}}" class="card-agree"></image>
+  <text>{{agreeNum}}</text> 
+</view>
+
+<view class='book-comment' catchtap='toComment' class= "card-con-right">
+  <image src='../test/commet.png'></image> 
+  <text>{{commetNum}}</text> 
+</view>   
+
+
+<view class="page-section">
+  <view class="weui-cells weui-cells_after-title">
+    <view class="weui-cell weui-cell_input">
+      <input class="weui-input" auto-focus placeholder="随意" bindinput="bindHideKeyboard" />
+    </view>
+  </view>
+</view>

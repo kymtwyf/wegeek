@@ -1,0 +1,12 @@
+/* miniprogram/pages/test/test.wxss */
+
+.card-con-right image{
+  width: 26px;
+  height: 26px;
+  margin-left: 20rpx;
+}
+
+/* .card-agree{
+  display: flex;
+  align-items: center;
+} */

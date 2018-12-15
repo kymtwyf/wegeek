@@ -53,4 +53,10 @@
     </navigator>
   </view>
 
+
+  <view class="to-qhome">
+    <navigator url="../test/test" open-type='navigate' class='btn-open-home'>
+      <text> aaa </text>
+    </navigator>
+  </view>
 </view>
