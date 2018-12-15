@@ -58,7 +58,8 @@ Page({
     console.log("start to submit data" + this.data.currentText)
     db.collection("pages").add({
       data: {
-        page_content: this.data.currentText
+        page_content: this.data.currentText,
+        publish_time: Date.parse(new Date())/1000
       }
     })
     .then(res => {
