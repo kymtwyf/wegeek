@@ -25,7 +25,9 @@ Page({
     commentContent: '',
     pageIndex: 0,
     pages: [],
-    color: undefined
+    color: undefined,
+    fromPage: 'desc',
+    reverse: 'desc'
   },
 
   onLoadPage: function (page) {
@@ -49,16 +51,16 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options.page_id)
+    console.log(options)
     this.setData({
-      // TODO
-      pageId: options.page_id
+      fromPage: options.from_uri,
+      reverse: options.reverse
     })
     const db = wx.cloud.database()
     console.log(getApp().globalData.openid)
     db.collection('pages').where({
       _openid: getApp().globalData.openid
-    }).orderBy('publish_time', 'desc').get({
+    }).orderBy('publish_time', this.data.reverse).get({
       success: (res) => {
         console.log(res)
         this.setData({
@@ -150,18 +152,23 @@ Page({
       wx.navigateTo({
         url: '../myBook/myBook'
       })
-    } else if (action == 'LEFT') {
+    } else if ((action == 'LEFT' && this.data.reverse == "desc") || (action == 'RIGHT' && this.data.reverse == 'asc')) {
+      console.log(this.data.fromPage)
       if (this.data.pageIndex - 1 >= 0){
         this.onLoadPage(this.data.pages[this.data.pageIndex - 1])
         this.setData({
           pageIndex: this.data.pageIndex - 1
         })
+      } else if (this.data.fromPage == "root") {
+        wx.navigateBack({
+          delta: 1
+        });
       }
-    } else if (action == 'RIGHT') {
+    } else if ((action == 'RIGHT' && this.data.reverse == "desc") || (action == 'LEFT' && this.data.reverse == 'asc')) {
       if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
         db.collection('pages').where({
           _openid: getApp().globalData.openid
-        }).orderBy('publish_time', 'desc')
+        }).orderBy('publish_time', this.data.reverse)
           .skip(this.data.pages.length).get().then(res => {
           console.log(res)
           this.setData({ 

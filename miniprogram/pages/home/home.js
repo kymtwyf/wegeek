@@ -5,6 +5,7 @@ const manager = plugin.getRecordRecognitionManager()
 // 获取数据库引用
 const db = wx.cloud.database()
 
+import { getSlideDirection } from '../utils';
 Page({
 
   /**
@@ -15,7 +16,8 @@ Page({
     currentText: '',
     bar_Height: wx.getSystemInfoSync().statusBarHeight,
     setSubmit:false,
-    setRecord:false
+    setRecord:false,
+    touchStart: undefined
   },
 
   streamRecord: function () {
@@ -38,6 +40,7 @@ Page({
     //有新的识别内容返回，则会调用此事件
     manager.onRecognize = (res) => {
       let text = res.result
+      
       this.setData({
         currentText: this.data.currentText + "\n" + text
       })
@@ -79,9 +82,8 @@ Page({
         console.log(res);
         res = JSON.parse(res.result);
         console.log(res);
-        let page_id = res['_id']
         wx.navigateTo({
-          url: '../submitted/submitted?page_id=' + page_id
+          url: '../submitted/submitted?reverse=desc&from_uri=root'
         })
       }
     });
@@ -171,6 +173,22 @@ Page({
    * 用户点击右上角分享
    */
   onShareAppMessage: function () {
+
+  },
+  onTouchStart(event) {
+    this.setData({
+      touchStart: event.touches[0]
+    })
+  },
+  onTouchEnd(event) {
+    let touchEnd = event.changedTouches[0];
+    let action = getSlideDirection(this.data.touchStart, touchEnd);
+
+    if (action === 'RIGHT') {
+      wx.navigateTo({
+        url: '../submitted/submitted?from_uri=root&reverse=desc'
+      })
+    }
 
   }
 })

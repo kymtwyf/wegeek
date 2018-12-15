@@ -84,8 +84,8 @@ Page({
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     
     if (action === 'DOWN') {
-      this.setData({
-        viewAllOthers: true
+      wx.navigateTo({
+        url: '../submitted/submitted?from_uri=others&reverse=desc'
       })
     }
 
