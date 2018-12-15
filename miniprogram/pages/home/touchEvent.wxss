@@ -1,0 +1,3 @@
+/* miniprogram/pages/home/touchEvent.wxss */
+
+@import '../../style/global.wxss'

@@ -1,0 +1,10 @@
+<!--miniprogram/pages/home/touchEvent.wxml-->
+<view class="page-body"
+  bind:touchstart="touchstart"
+  bind:touchmove="touchmove"
+  bind:touchend="touchend">
+
+  <text class="action">
+    {{ action }}
+  </text>
+</view>

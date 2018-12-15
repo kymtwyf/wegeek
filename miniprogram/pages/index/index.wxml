@@ -40,4 +40,17 @@
     </navigator>
   </view>
 
+    <!-- 新建云函数 -->
+  <view class="uploader">
+    <navigator url="../home/touchEvent" open-type="navigate" class="uploader-text">
+      <text>手势</text>
+    </navigator>
+  </view>
+
+  <view class="to-home">
+    <navigator url="../home/home" open-type='navigate' class='btn-open-home'>
+      <text> home </text>
+    </navigator>
+  </view>
+
 </view>

@@ -1,0 +1,17 @@
+<!--miniprogram/home/home.wxml-->
+<view class="page-body">
+  <view class="text-wrapper">
+    <textarea
+      class="text"
+      placeholder="语不惊人死不休"
+    />
+  </view>
+  <view class="buttons">
+    <view class="record">
+    录音
+    </view>
+    <view class="submit">
+    提交
+    </view>
+  </view>
+</view>
