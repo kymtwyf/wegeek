@@ -23,7 +23,9 @@ Page({
     showComments: false,
     touchStart: undefined,
     commentsTouchStart: undefined,
-    commentContent: ''
+    commentContent: '',
+    pageIndex: 0,
+    pages: []
   },
 
 
@@ -31,19 +33,40 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
+    const app = getApp()
     console.log(options.page_id)
     this.setData({
+      // TODO
       pageId: options.page_id || 'XBUU0MDR1TiN3wnr'
     })
     const db = wx.cloud.database()
     db.collection('pages').where({
-      _id: options.page_id || 'XBUU0MDR1TiN3wnr'
-    }).get({
+      _openid: app.globalData.openid
+    }).orderBy('publish_time', 'desc').get({
       success: (res) => {
         console.log(res)
         this.setData({
-          pageContent: res.data[0].page_content
+          pages: res.data
         })
+        
+        for (var i = 0; i < res.data.length; i++ ){
+          console.log(res.data[i]._id == options.page_id)
+          if (res.data[i]._id == options.page_id) {
+            //console.log(res.data[i])
+            this.setData({
+              pageIndex: i,
+              pageContent: res.data[i].page_content,
+            })
+            break
+          }
+        }
+
+        if (i == res.data.length){
+          this.setData({
+            pageIndex: 0
+          })
+          console.log("index error")
+        }
       },
       fail: (err) => {
         wx.showToast({
