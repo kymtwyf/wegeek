@@ -29,7 +29,7 @@
     向上拉也可查看整本书哦！
   </view>
   <view class="buttons">
-    <view class="button-watch-others">
+    <view class="button-watch-others" bind:tap="goOthersPages">
       别人的书
     </view>
   </view>

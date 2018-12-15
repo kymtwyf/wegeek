@@ -96,6 +96,10 @@ Page({
   },
   viewComment: function () {
     console.log('view comments')
+    if (this.data.commentCount === 0) {
+      console.log('nothing to view; return;')
+      return 
+    }
     this.setData({
       showComments: true
     })
@@ -196,5 +200,10 @@ Page({
   },
   doNothing: function () {
     console.log('do nothing')
+  },
+  goOthersPages: function () {
+    wx.navigateTo({
+      url: '../others/pages'
+    })
   }
 })

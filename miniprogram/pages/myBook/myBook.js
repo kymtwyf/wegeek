@@ -62,5 +62,10 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  goMyBook () {
+    wx.navigateBack({
+      delta: 1
+    });
   }
 })

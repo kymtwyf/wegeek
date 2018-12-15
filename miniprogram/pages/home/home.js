@@ -70,8 +70,10 @@ Page({
     wx.cloud.callFunction({
       name: 'submitData',
       data: {
+        openid: app.globalData.openid,
         page_content: this.data.currentText,
-        publish_time: Date.parse(new Date()) / 1000
+        publish_time: Date.parse(new Date()) / 1000,
+        likes: 0
       },
       success: res => {
         console.log(res);

@@ -25,5 +25,7 @@ page > .page-body > .tabar view {
 
 
 textarea.text {
-  height: 440rpx;
+  height: 480rpx;
+  font-size: 28rpx;
+  color: rgba(51, 51, 51, 1)
 }
