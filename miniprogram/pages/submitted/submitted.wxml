@@ -15,11 +15,11 @@
     />
 
     <view class="comment-status">
-      <i class=""/>
+      <i class="font_family icon-xihuan" style="font-size :35rpx;color :gray"/>
       <view class="like-count">
         {{ likeCount }}
       </view>
-      <i class="" catch:tap="viewComment"/>
+      <i class="font_family icon-pinglun" style="font-size :35rpx;color :gray" catch:tap="viewComment"/>
       <view class="comment-count" catch:tap="viewComment">
         {{ commentCount }}
       </view>

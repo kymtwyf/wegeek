@@ -66,7 +66,25 @@ Page({
     this.setData({
       setSubmit: true
     })      
-    console.log("start to submit data" + this.data.currentText)
+    console.log("start to submit data " + this.data.currentText)
+    wx.cloud.callFunction({
+      name: 'submitData',
+      data: {
+        page_content: this.data.currentText,
+        publish_time: Date.parse(new Date()) / 1000,
+        likes: 0
+      },
+      success: res => {
+        console.log(res);
+        res = JSON.parse(res.result);
+        console.log(res);
+        let page_id = res['_id']
+        wx.navigateTo({
+          url: '../submitted/submitted?page_id=' + page_id
+        })
+      }
+    });
+    return;
     db.collection("pages").add({
       data: {
         page_content: this.data.currentText,
