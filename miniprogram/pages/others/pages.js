@@ -1,3 +1,4 @@
+var app = getApp()
 // miniprogram/pages/others/pages.js
 import { getSlideDirection } from '../utils';
 Page({
@@ -8,15 +9,43 @@ Page({
   data: {
     bar_Height: wx.getSystemInfoSync().statusBarHeight,
     viewAllOthers: true, // 看所有人的书页 false 表示只看一个人的书
-    pageContent: 'abcabc',
-    touchStart: undefined
+    pageContent: '',
+    pageIndex: 0,
+    pages: [],
+    touchStart: undefined,
+    exclude: []
+  },
+
+  onPageLoad: function (page) {
+    this.setData({
+      pageContent: page.page_content,
+      color: page.color
+    })
   },
 
   /**
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-
+    wx.cloud.callFunction({
+      name: 'dispatchPages',
+      data: {
+        openid: app.globalData.openid,
+        exclude: this.data.exclude
+      },
+      success: res => {
+        console.log(res)
+        var result = JSON.parse(res.result)
+        this.data.pages = result
+        this.data.pageIndex = 0
+        for (var i = 0; i < result.length; i++) {
+          console.log(result[i])
+          this.data.exclude.push(result[i]._id)
+        }
+        console.log(this.data.exclude)
+        this.onPageLoad(result[0])
+      }
+    });
   },
 
   /**
@@ -80,7 +109,7 @@ Page({
     })
   },
   onTouchEnd (event) {
-   let touchEnd = event.changedTouches[0];
+    let touchEnd = event.changedTouches[0];
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     
     if (action === 'DOWN') {
@@ -89,14 +118,34 @@ Page({
       })
     }
 
-    if (action === 'LEFT' || action === 'RIGHT') {
-      // TODO: GO NEXT PAGE
-      if (this.data.viewAllOthers) {
-      // TODO: 去所有人的
-
-      } else {
-      // TODO: 只去一个人的
-        
+    if (action === 'RIGHT' ){
+      if (this.data.pageIndex - 1 >= 0) {
+        this.onPageLoad(this.data.pages[this.data.pageIndex - 1])
+        this.data.pageIndex = this.data.pageIndex - 1
+      }
+    } else if( action === 'LEFT') {
+      if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
+        wx.cloud.callFunction({
+          name: 'dispatchPages',
+          data: {
+            openid: app.globalData.openid,
+            exclude: this.data.exclude
+          },
+          success: res => {
+            console.log(res)
+            var result = JSON.parse(res.result)
+            for (var i = 0; i < result.length; i++) {
+              console.log(result[i])
+              this.data.exclude.push(result[i]._id)
+            }
+            console.log(this.data.exclude)
+            this.data.pages = this.data.pages.concat(result)
+          }
+        });
+      }
+      if (this.data.pageIndex + 1 < this.data.pages.length) {
+        this.onPageLoad(this.data.pages[this.data.pageIndex + 1])
+        this.data.pageIndex = this.data.pageIndex + 1
       }
     }
 

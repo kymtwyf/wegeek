@@ -6,7 +6,8 @@
     <view>别人的书页</view>
   </view>
 
-  <view class="pages-container" catch:tap="tapped">
+  <view class="pages-container" catch:tap="tapped" bind:touchstart="onTouchStart"
+  bind:touchend="onTouchEnd">
     <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
     <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
     <textarea
