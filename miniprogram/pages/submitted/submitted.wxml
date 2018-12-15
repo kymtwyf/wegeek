@@ -1,0 +1,38 @@
+<!--miniprogram/pages/submitted/submitted.wxml-->
+
+<view class="page-body">
+  <view class="page-container">
+    <view class="page-content">
+      内容：  {{ pageContent }}
+    </view>
+    <view class="status">
+      <view class="like-count">
+        {{ likeCount }}
+      </view>
+      <view class="comment-count" bind:tap="viewComment">
+        我是评论数，点我{{ commentCount }}
+      </view>
+    </view>
+  </view>
+  <view class="hint-text">
+    向上拉也可查看整本书哦！
+  </view>
+  <view class="buttons">
+    <view class="button">
+      btn别人的书
+    </view>
+    <view class="button">
+      btn 我的时锦
+    </view>
+  </view>
+
+  <cover-view wx:if="{{ showComments }}"
+    class="comments-container">
+
+    <cover-view class="close-btn" bind:tap="closeComment">
+      关闭
+    </cover-view>
+    aaa
+  </cover-view>
+
+</view>

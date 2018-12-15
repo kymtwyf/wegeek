@@ -11,6 +11,7 @@ Page({
    * 页面的初始数据
    */
   data: {
+    showWelcome: true,
     currentText: '',
   },
 
@@ -55,14 +56,17 @@ Page({
     .then(res => {
       console.log(res)
       let page_id = res['_id']
-      db.collection("user_info").add({
-        data: {
-          page_id: page_id
-        },
-        success(res) {
-          console.log(res)
-        }
+      wx.navigateTo({
+        url: '../submitted/submitted?page_id=' + page_id
       })
+      // db.collection("user_info").add({
+      //   data: {
+      //     page_id: page_id
+      //   },
+      //   success(res) {
+      //     console.log(res)
+      //   }
+      // })
     })
   },
 
@@ -98,7 +102,12 @@ Page({
    * 生命周期函数--监听页面显示
    */
   onShow: function () {
-
+    const _this = this
+    setTimeout(function () {
+      _this.setData({
+        showWelcome: false
+      })
+    }, 1000);
   },
 
   /**

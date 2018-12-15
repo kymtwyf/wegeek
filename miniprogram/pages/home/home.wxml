@@ -1,5 +1,8 @@
 <!--miniprogram/home/home.wxml-->
 <view class="page-body">
+  <navigator url="../index/index" open-type="navigate" class="">
+      <text>go guide</text>
+  </navigator>
   <view class="text-wrapper">
     <textarea
       class="text"
@@ -7,7 +10,6 @@
       value="{{currentText}}"
       bindinput='bindEquipmentId'
     />
-
   </view>
   <view class="buttons">
     <view class="record" catchtouchstart="streamRecord" catchtouchend="streamRecordEnd">
@@ -17,4 +19,12 @@
     提交
     </view>
   </view>
+
+<view class="welcome {{showWelcome ? 'show':'hide'}}">
+  <view class="icons">
+    <image class="shijin" src="../../images/logo@2x.png"/>
+    <image class="shijin-text" src="../../images/时锦@2x.png"/>
+    <image class="shijin-slogon" src="../../images/每个人都是一本书@2x.png"/>
+  </view>
+</view>
 </view>
