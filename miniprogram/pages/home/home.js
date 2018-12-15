@@ -31,7 +31,7 @@ Page({
     manager.onRecognize = (res) => {
       let text = res.result
       this.setData({
-        currentText: text,
+        currentText: this.data.currentText + "\n" + text,
       })
     }
     // 识别结束事件
@@ -42,7 +42,7 @@ Page({
         return
       }
       this.setData({
-        currentText: text,
+        currentText: this.data.currentText + "\n" + text,
       })
     }
   },
