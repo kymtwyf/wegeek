@@ -26,6 +26,7 @@
 }
 
 .text-wrapper {
+  z-index: 1;
   margin-top: 54rpx;
   box-sizing: border-box;
   padding: 110rpx 100rpx;
@@ -40,6 +41,33 @@
   position: absolute;
   top: 0;
   left: 0;
+  z-index: -1;
+}
+.text-wrapper .comment-status {
+  position: absolute;
+  right: 20rpx;
+  bottom: 100rpx;
+
+  width: 298rpx;
+  height: 60rpx;
+
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(248,248,248,1);
+  border-radius: 30rpx 0rpx 0rpx 30rpx;
+  
+  
+}
+.text-wrapper > .back-to-home {
+  position: absolute;
+  left: 88rpx;
+  top: 0;
+
+  width: 80rpx;
+  height: 74rpx;
 }
 .text {
   font-size: 28rpx;
@@ -47,29 +75,25 @@
 }
 
 .buttons {
+  position: absolute;
+  bottom: 142rpx;
+
   width: 100%;
   display: flex;
   justify-content: center;
   text-align: center;
 }
 
-.buttons > .record {
-  width: 150rpx;
-  height: 150rpx;
-  border-radius: 50%;
-  background-color: white;
-  margin-right: 37rpx;
+.buttons > .button-watch-others {
+  width:686rpx;
+  height: 88rpx;
+  background:rgba(255,255,255,1);
+  border-radius: 44rpx;
+
+  line-height: 88rpx;
+  font-size: 36rpx;
+  color: rgba(51, 51, 51, 1);
 }
-
-
-.buttons > .submit {
-  width: 150rpx;
-  height: 150rpx;
-  border-radius: 50%;
-  background-color: white;
-  margin-left: 37rpx;
-}
-
 
 .welcome {
   width: 100%;
@@ -115,6 +139,16 @@
   width: 214rpx;
   height: 28rpx;
 }
+
+.hint-text {
+  color: white;
+  font-size: 30rpx;
+  width: 100%;
+  position: fixed;
+  bottom: 30rpx;
+  text-align: center;
+}
+
 
 .comments-container {
     background-color: rgba(0, 0, 0, .2);

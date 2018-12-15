@@ -17,7 +17,8 @@ Page({
     pageContent: '',
     likeCount: 123,
     commentCount: 234,
-    showComments: false
+    showComments: false,
+    touchStart: undefined
   },
 
 
@@ -105,5 +106,20 @@ Page({
    */
   onShareAppMessage: function () {
 
+  },
+  onTouchStart: function (event) {
+    this.setData({
+      touchStart: event.touches[0]
+    })
+  },
+  onTouchEnd: function (event) {
+    let touchEnd = event.changedTouches[0];
+    let action = getSlideDirection(this.data.touchStart, touchEnd);
+    if (action === 'UP') {
+      console.log('go my book page')
+      // wx.navigateTo({
+      //   url: '../'
+      // })
+    }
   }
 })
