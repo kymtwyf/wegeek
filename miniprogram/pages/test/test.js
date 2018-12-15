@@ -1,10 +1,13 @@
+// require( '../iconfont.js')
 // miniprogram/pages/test/test.js
 Page({
   data: {
     avatarUrl: '../test/wish1.png',
     agree: false,
     agreeNum: 1,
-    inputText:"",
+    comment:false,
+    commetNum:0,
+    bar_Height: wx.getSystemInfoSync().statusBarHeight
     // wishList: [
     //   {
     //     img: '../test/wish1.png',
@@ -35,6 +38,22 @@ Page({
       agreeNum : cnt
     })
   },
+  toComment: function (event) {
+    let stat
+    let cnt
+    if (!this.data.comment) {
+      stat = !this.data.comment
+      cnt = this.data.commetNum + 1
+    } else if (this.data.comment) {
+      stat = !this.data.comment
+      cnt = this.data.commetNum - 1
+    }
+    this.setData({
+      comment: stat,
+      commetNum: cnt
+    })
+  },
+
 
   bindReplaceInput: function (e) {
     // console.log(this.data.inputText)

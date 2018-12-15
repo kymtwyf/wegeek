@@ -59,6 +59,7 @@
       <text> aaa </text>
     </navigator>
   </view>
+
   <view class="uploader">
     <navigator url="../home/welcome" open-type="navigate" class="uploader-text">
       <text>welcome</text>

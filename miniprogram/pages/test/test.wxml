@@ -1,15 +1,21 @@
 <!--miniprogram/pages/test/test.wxml-->
-<!-- <text>miniprogram/pages/test/test.wxml</text> -->
+<view class='tabar' style='top:{{bar_Height}}px;'>
+  <view>个人中心</view>
+</view>
+<view>
+
+<i class="font_family icon-xihuan" style='color : red'></i>
 <view catchtap='onCollectionTap' class= "card-con-right">
-  <image  src="../test/{{agree?'wish2.png':'wish1.png'}}" class="card-agree"></image>
+  <!-- <image  src="../test/{{agree?'wish2.png':'wish1.png'}}" class="card-agree"></image> -->
+  <i class="font_family icon-xihuan" style="color :{{agree?'red':'unset'}}"></i>
   <text>{{agreeNum}}</text> 
 </view>
 
 <view class='book-comment' catchtap='toComment' class= "card-con-right">
-  <image src='../test/commet.png'></image> 
+  <!-- <image src='../test/commet.png'></image>  -->
+  <i class="font_family icon-pinglun" style="color :{{comment?'blue':'unset'}}"></i>
   <text>{{commetNum}}</text> 
 </view>   
-
 
 <view class="page-section">
   <view class="weui-cells weui-cells_after-title">
@@ -17,4 +23,6 @@
       <input class="weui-input" auto-focus placeholder="随意" bindinput="bindHideKeyboard" />
     </view>
   </view>
+</view>
+
 </view>

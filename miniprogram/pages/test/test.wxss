@@ -1,10 +1,26 @@
 /* miniprogram/pages/test/test.wxss */
-
+page {
+  background: #dba6a6
+}
 .card-con-right image{
   width: 26px;
   height: 26px;
   margin-left: 20rpx;
 }
+.tabar {
+  width: 100%;
+  box-sizing: border-box;
+  position: fixed;
+  text-align: center;
+  font-size: 12pt;
+  color: #6cbc72;
+  background-color:transparent;
+}
+
+.tabar view {
+  padding: 25rpx 0rpx;
+}
+
 
 /* .card-agree{
   display: flex;
