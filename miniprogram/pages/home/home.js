@@ -78,7 +78,6 @@ Page({
   },
 
   bindEquipmentId: function (e) {
-    console.log(e.detail.value)
     this.setData({
       currentText: e.detail.value
     })
