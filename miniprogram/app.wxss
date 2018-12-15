@@ -3,9 +3,8 @@ page {
   background-color: #F8F8F8;
   height: 100%;
 }
-.container {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  box-sizing: border-box;
-} 
+page > .page-body {
+  height: 100%;
+}
+
+/* @import 'style/iconfont.wxss'; */
