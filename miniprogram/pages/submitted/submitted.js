@@ -24,7 +24,8 @@ Page({
     commentsTouchStart: undefined,
     commentContent: '',
     pageIndex: 0,
-    pages: []
+    pages: [],
+    color: undefined
   },
 
 
@@ -45,7 +46,8 @@ Page({
       success: (res) => {
         console.log(res)
         this.setData({
-          pages: res.data
+          pages: res.data,
+          color: res.data[0].color
         })
         
         for (var i = 0; i < res.data.length; i++ ){

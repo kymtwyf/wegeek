@@ -1,5 +1,6 @@
 <!--miniprogram/home/home.wxml-->
 <view class="page-body {{showWelcome ? '':'show'}}"
+  style="{{color ? ('background:linear-gradient(-45deg,' + color[0] +',' + color[1]+');'): ''}}"
   bind:touchstart="onTouchStart"
   bind:touchend="onTouchEnd">
   <view class='tabar' style='margin-top:{{bar_Height}}px;'>
