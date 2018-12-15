@@ -1,0 +1,14 @@
+/* miniprogram/pages/home/welcome.wxss */
+
+.welcome {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.welcome > .loading {
+    width: 64px;
+    height: 64px;
+}

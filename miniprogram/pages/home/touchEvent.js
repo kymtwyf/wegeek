@@ -1,12 +1,12 @@
 // miniprogram/pages/home/touchEvent.js
+import { getSlideDirection } from '../utils';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    startX: 0,
-    startY: 0,
+    touchStart: null,
     action: '',
     activeIndex: 0,
     activeStatus: 'inactive',
@@ -82,22 +82,24 @@ Page({
     console.log('touchstart');
     // console.log(arguments);
     this.setData({
-      startX: event.touches[0].pageX,
-      startY: event.touches[0].pageY
+      touchStart: event.touches[0]
     })
   },
   touchend: function(event) {
     console.log('touchend');
     console.log(event);
-    let endX = event.changedTouches[0].pageX;
-    let endY = event.changedTouches[0].pageY;
-    console.log(JSON.stringify(this.data));
-    let action;
-    if (endX < this.data.startX && Math.abs(endY - this.data.startY) < 10) {
-      action = 'LEFT'
-    } else if (endX > this.data.startX && Math.abs(endY - this.data.startY) < 10) {
-      action = 'RIGHT'
-    }
+    // let endX = event.changedTouches[0].pageX;
+    // let endY = event.changedTouches[0].pageY;
+    // console.log(JSON.stringify(this.data));
+    // let action;
+    // if (endX < this.data.startX && Math.abs(endY - this.data.startY) < 10) {
+    //   action = 'LEFT'
+    // } else if (endX > this.data.startX && Math.abs(endY - this.data.startY) < 10) {
+    //   action = 'RIGHT'
+    // }
+
+    let touchEnd = event.changedTouches[0];
+    let action = getSlideDirection(this.data.touchStart, touchEnd);
     this.setAction(action);
   },
   setAction (action) {
@@ -105,7 +107,7 @@ Page({
 
     if (action === 'LEFT') {
       activeIndex = ((activeIndex - 1) + 3)%3
-    } else {
+    } else if (action === 'RIGHT') {
       activeIndex = ((activeIndex + 1))%3
     }
     this.setData({

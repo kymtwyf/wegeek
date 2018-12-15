@@ -1,0 +1,4 @@
+<!--miniprogram/pages/home/welcome.wxml-->
+<view class="welcome">
+  <image class="loading" src="../../images/loading.gif"/>
+</view>
