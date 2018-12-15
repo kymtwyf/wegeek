@@ -7,4 +7,9 @@
   <text class="action">
     {{ action }}
   </text>
+  <view class="books">
+    <view class="book {{activeIndex === index ? 'active': ''}}" wx:for="{{list}}" wx:key="{{index}}">
+        {{ index }}
+    </view>
+  </view>
 </view>

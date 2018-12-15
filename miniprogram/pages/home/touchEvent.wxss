@@ -1,3 +1,13 @@
 /* miniprogram/pages/home/touchEvent.wxss */
 
 @import '../../style/global.wxss'
+
+.books {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;  
+}
+
+.book.active {
+  color: red;
+}

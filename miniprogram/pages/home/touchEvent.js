@@ -7,7 +7,15 @@ Page({
   data: {
     startX: 0,
     startY: 0,
-    action: ''
+    action: '',
+    activeIndex: 0,
+    list: [{
+      text: '1'
+    }, {
+      text: '2'
+    }, {
+      text: '3'
+    }]
   },
 
   /**
@@ -92,8 +100,16 @@ Page({
     this.setAction(action);
   },
   setAction (action) {
+    let activeIndex = this.data.activeIndex
+
+    if (action === 'LEFT') {
+      activeIndex = ((activeIndex - 1) + 3)%3
+    } else {
+      activeIndex = ((activeIndex + 1))%3
+    }
     this.setData({
-      action: action
+      action: action,
+      activeIndex: activeIndex
     })
   }
 })
