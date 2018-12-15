@@ -36,3 +36,20 @@
   line-height: 192rpx;
   text-align: center;
 }
+
+.comment-status {
+  position: absolute;
+  right: 20rpx;
+  bottom: 100rpx;
+
+  width: 298rpx;
+  height: 60rpx;
+
+  font-size: 28rpx;
+  display: flex;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  background-color: rgba(248,248,248,1);
+  border-radius: 30rpx 0rpx 0rpx 30rpx; 
+}

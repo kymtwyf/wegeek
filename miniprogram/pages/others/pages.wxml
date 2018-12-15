@@ -6,7 +6,7 @@
     <view>别人的书页</view>
   </view>
 
-  <view class="pages-container" catch:tap="tapped">
+  <view class="pages-container" bind:tap="tapped">
     <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
     <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
     <textarea
@@ -14,14 +14,38 @@
       value="{{pageContent}}"
       disabled=true
     />
-    <view class="comments-area" wx:if="{{ canCommentLike }}">
-    
+
+    <view class="comment-status">
+      <i class="font_family icon-xihuan" style="font-size :35rpx;color :gray"/>
+      <view class="like-count">
+        {{ likeCount }}
+      </view>
+      <i class="font_family icon-pinglun" style="font-size :35rpx;color :gray" catch:tap="viewComment"/>
+      <view class="comment-count" catch:tap="viewComment">
+        {{ commentCount }}
+      </view>
     </view>
   </view>
 
-  <view class="my-book-container">
+  <view class="my-book-container" bind:tap="goMyBook">
     <view class="my-book">
         我的书
+    </view>
+  </view>
+
+  <view wx:if="{{ showComments }}"
+    class="comments-container" catch:tap="closeComment">
+    <view class="comments" bind:touch="onCommentsTouchStart"
+      bind:touchend="onCommentsTouchEnd"
+      catch:tap="doNothing"
+      data-id="123">
+      <image class="background" 
+        src="../../images/comments-bg@2x.png"/>
+      <textarea
+        class="text"
+        value="{{commentContent}}"
+        disabled=true
+        />
     </view>
   </view>
 </view>

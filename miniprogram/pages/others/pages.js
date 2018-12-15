@@ -8,8 +8,19 @@ Page({
   data: {
     bar_Height: wx.getSystemInfoSync().statusBarHeight,
     viewAllOthers: true, // 看所有人的书页 false 表示只看一个人的书
-    pageContent: 'abcabc',
-    touchStart: undefined
+    pageContent: '书页',
+    likeCount: 123,
+    commentCount: 234,
+
+    showComments: false,
+    commentContent: '评论',
+
+    touchStart: undefined,
+    allOtherPages: [],
+    allOtherPagesIndex: 0,
+    currentOtherOpenId: undefined,
+    currentOtherPages: [],
+    currentOtherPagesIndex: 0
   },
 
   /**
@@ -100,6 +111,36 @@ Page({
       }
     }
 
+  },
+  goMyBook () {
+    wx.navigateBack({
+      delta: 1
+    })
+  },
+  onCommentsTouchStart: function (event) {
+    console.log(tapStart)
+    this.setData({
+      onCommentsTouchStart: event.touches[0]
+    })
+  },
+  onCommentsTouchEnd: function (event) {
+    let touchEnd = event.changedTouches[0];
+    let action = getSlideDirection(this.data.touchStart, touchEnd);
+    if (action === 'LEFT') {
+      if (commentIndex + 1 < comment.length) {
+        this.setData({
+          commentIndex: commentIndex + 1,
+          commentContent: comments[commentIndex].comment_content
+        })
+      }
+    } else if (action == 'RIGHT') {
+      if (commentIndex - 1 > 0) {
+        this.setData({
+          commentIndex: commentIndex - 1,
+          commentContent: comments[commentIndex].comment_content
+        })
+      }
+    }
   }
 
 })
