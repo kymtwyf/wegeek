@@ -92,6 +92,7 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
       //resolve(JSON.stringify(chunk));
       db.collection("pages").add({
         data: {
+          "_openid": event.openid,
           page_content: event.page_content,
           publish_time: event.publish_time,
           color: color_json.color,
