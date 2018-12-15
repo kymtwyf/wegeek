@@ -16,10 +16,12 @@ Page({
     bar_Height: wx.getSystemInfoSync().statusBarHeight,
     pageId: '',
     pageContent: '',
-    likeCount: 123,
-    commentCount: 234,
+    likeCount: 0,
+    commentCount: 0,
+    comments: [],
+    commentIndex: 0,
     showComments: false,
-    touchStart: undefined
+    touchStart: undefined,
   },
 
 
@@ -47,6 +49,25 @@ Page({
           title: '查询pages 记录失败' + err
         })
       }
+    })
+
+    db.collection('comments').where({
+      page_id: options.page_id
+    }).get({
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          commentCount: res.data.length,
+          comments: res.data
+        })
+      },
+      fail: (err) => {
+        wx.showToast({
+          icon: 'none',
+          title: '查询comments 记录失败' + err
+        })
+      }
+
     })
   },
   viewComment: function () {
