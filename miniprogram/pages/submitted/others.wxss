@@ -56,7 +56,9 @@
   justify-content: space-around;
   align-items: center;
   background-color: rgba(248,248,248,1);
-  border-radius: 30rpx 0rpx 0rpx 30rpx;  
+  border-radius: 30rpx 0rpx 0rpx 30rpx;
+  
+  text-align: center;
 }
 
 .comment-status > i,
