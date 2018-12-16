@@ -256,6 +256,11 @@ Page({
         this.setData({
           pageIndex: this.data.pageIndex - 1
         })
+      } else {
+        wx.showToast({
+          title: '已经到头咯',
+          duration: 1000
+        })
       }
     } else if ((action == 'RIGHT' && this.data.reverse == "desc") || (action == 'LEFT' && this.data.reverse == 'asc')) {
       if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
@@ -284,6 +289,11 @@ Page({
         this.onLoadPage(this.data.pages[this.data.pageIndex + 1])
         this.setData({
           pageIndex: this.data.pageIndex + 1
+        })
+      } else {
+        wx.showToast({
+          title: '已经到底咯',
+          duration: 1000
         })
       }
     }

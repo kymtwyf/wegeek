@@ -219,6 +219,11 @@ Page({
         this.setData({
           pageIndex: this.data.pageIndex + 1
         })
+      } else {
+        wx.showToast({
+          title: '已经到底咯',
+          duration: 1000
+        })
       }
     }
   },
