@@ -52,11 +52,11 @@ Page({
   },
 
   onLoadPage: function (page) {
-    console.log(page)
+    //console.log(page)
     db.collection('comments').where({
       page_id: page._id
     }).get().then(res => {
-      console.log(res)
+      //console.log(res)
       this.setData({
         commentCount: res.data.length,
         comments: res.data,
@@ -70,7 +70,7 @@ Page({
   smartNavigate: function (route) {
     var pages = getCurrentPages()
     for (var i = 0; i < pages.length; i++) {
-      console.log(pages[i])
+      //console.log(pages[i])
       if (pages[i].route === route) {
         wx.navigateBack({
           delta: pages.length - i
@@ -89,18 +89,18 @@ Page({
    * 生命周期函数--监听页面加载
    */
   onLoad: function (options) {
-    console.log(options)
+    //console.log(options)
     this.setData({
       fromPage: options.from_uri || '',
       reverse: options.reverse || 'desc'
     })
     const db = wx.cloud.database()
-    console.log(getApp().globalData.openid)
+    //console.log(getApp().globalData.openid)
     db.collection('pages').where({
       _openid: getApp().globalData.openid
     }).orderBy('publish_time', this.data.reverse).get({
       success: (res) => {
-        console.log(res)
+        //console.log(res)
         this.setData({
           pages: res.data,
           pageIndex: 0
@@ -126,7 +126,7 @@ Page({
     })
   },
   closeComment: function () {
-    console.log(arguments);
+    //console.log(arguments);
     this.setData({
       showComments: false,
       commentContent: ''
@@ -192,7 +192,7 @@ Page({
       console.log('go my book page')
       this.smartNavigate('pages/myBook/myBook')
     } else if ((action == 'LEFT' && this.data.reverse == "desc") || (action == 'RIGHT' && this.data.reverse == 'asc')) {
-      console.log(this.data.fromPage)
+      //console.log(this.data.fromPage)
       if (this.data.pageIndex - 1 >= 0){
         this.onLoadPage(this.data.pages[this.data.pageIndex - 1])
         this.setData({
@@ -207,7 +207,7 @@ Page({
           _openid: getApp().globalData.openid
         }).orderBy('publish_time', this.data.reverse)
           .skip(this.data.pages.length).get().then(res => {
-          console.log(res)
+          //console.log(res)
           this.setData({ 
             pages: this.data.pages.concat(res.data)
           })
@@ -228,7 +228,7 @@ Page({
     }
   },
   onCommentsTouchStart: function (event) {
-    console.log(tapStart)
+    //console.log(tapStart)
     this.setData({
       onCommentsTouchStart: event.touches[0]
     })
