@@ -48,7 +48,7 @@ Page({
     pages: [],
     color: undefined,
     fromPage: 'desc',
-    reverse: 'desc',
+    reverse: 'asc',
 
     exclude: [],
     othersOpenId: undefined,
@@ -58,6 +58,24 @@ Page({
     commenting: false, //正在评论别人
     commentText: undefined,// 评论别人的文字
     liked: false,
+  },
+  smartNavigate: function (route) {
+    var pages = getCurrentPages()
+    for (var i = 0; i < pages.length; i++) {
+      console.log(pages[i])
+      if (pages[i].route === route) {
+        wx.navigateBack({
+          delta: pages.length - i
+        })
+        break
+      }
+    }
+    if (i == pages.length) {
+      route = '/' + route
+      wx.navigateTo({
+        url: route
+      })
+    }
   },
   viewOnes: function () {
     const db = wx.cloud.database()
@@ -146,11 +164,10 @@ Page({
     
   },
   backHome: function () {
-    if (this.data.fromPage == "root") {
-      wx.navigateBack({
-        delta: 1
-      });
-    }
+    this.onLoadPage(this.data.pages[0])
+    this.setData({
+      pageIndex: 0
+    })
   },
   viewComment: function () {
     console.log('view comments')
@@ -239,10 +256,6 @@ Page({
         this.setData({
           pageIndex: this.data.pageIndex - 1
         })
-      } else if (this.data.fromPage == "root") {
-        wx.navigateBack({
-          delta: 1
-        });
       }
     } else if ((action == 'RIGHT' && this.data.reverse == "desc") || (action == 'LEFT' && this.data.reverse == 'asc')) {
       this.setData({
@@ -320,9 +333,7 @@ Page({
     }
   },
   goMyBook: function () {
-    wx.navigateTo({
-      url: './submitted'
-    })
+    this.smartNavigate('page/submitted/submitted')
   },
   submitComment: function () {
     const _this = this
