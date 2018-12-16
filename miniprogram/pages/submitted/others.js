@@ -62,7 +62,7 @@ Page({
   smartNavigate: function (route) {
     var pages = getCurrentPages()
     for (var i = 0; i < pages.length; i++) {
-      console.log(pages[i])
+      //console.log(pages[i])
       if (pages[i].route === route) {
         wx.navigateBack({
           delta: pages.length - i
@@ -83,7 +83,7 @@ Page({
       _openid: this.data.othersOpenId
     }).orderBy('publish_time', this.data.reverse).get({
       success: (res) => {
-        console.log(res)
+        //console.log(res)
         this.setData({
           pages: res.data,
           pageIndex: 0
@@ -99,7 +99,7 @@ Page({
     db.collection('comments').where({
       page_id: page._id
     }).get().then(res => {
-      console.log(res)
+      //console.log(res)
       this.setData({
         currentPage: page, 
         commentCount: res.data.length,
@@ -148,7 +148,7 @@ Page({
         success: res => {
           var result = JSON.parse(res.result)
           console.log('dispatched pages')
-          console.log(result)
+          //console.log(result)
           this.data.pages = result
           this.data.pageIndex = 0
           // 我们看过之后再加 exclude
@@ -181,7 +181,7 @@ Page({
     })
   },
   closeComment: function () {
-    console.log(arguments);
+    //console.log(arguments);
     this.setData({
       showComments: false,
       commentContent: ''
@@ -255,7 +255,7 @@ Page({
       })
       this.onLoad()
     } else if ((action == 'LEFT' && this.data.reverse == "desc") || (action == 'RIGHT' && this.data.reverse == 'asc')) {
-      console.log(this.data.fromPage)
+      //console.log(this.data.fromPage)
       if (this.data.pageIndex - 1 >= 0){
         this.onLoadPage(this.data.pages[this.data.pageIndex - 1])
         this.setData({
@@ -278,7 +278,7 @@ Page({
             _openid: this.data.othersOpenId
           }).orderBy('publish_time', this.data.reverse)
             .skip(this.data.pages.length).get().then(res => {
-            console.log(res)
+            //console.log(res)
             this.setData({ 
               pages: this.data.pages.concat(res.data)
             })
@@ -292,7 +292,7 @@ Page({
       if (this.data.pageIndex + 1 < this.data.pages.length) {
         // 看过 pageIndex 这一页了
         this.data.exclude.push(this.data.pages[this.data.pageIndex]._id)
-        console.log(this.data.exclude)
+        //console.log(this.data.exclude)
 
         this.onLoadPage(this.data.pages[this.data.pageIndex + 1])
         this.setData({
@@ -307,7 +307,7 @@ Page({
     }
   },
   onCommentsTouchStart: function (event) {
-    console.log(tapStart)
+    //console.log(tapStart)
     this.setData({
       onCommentsTouchStart: event.touches[0]
     })
@@ -340,7 +340,7 @@ Page({
         othersOpenId: this.data.currentPage ? this.data.currentPage._openid : '',
         viewAllOthers: false
       })
-      console.log(setDataRes)
+      //console.log(setDataRes)
       // this.onLoad()
       this.viewOnes()
     } else {
@@ -360,7 +360,7 @@ Page({
           page_id: this.data.currentPage._id
         }
       }).then(res => {
-        console.log(res);
+        //console.log(res);
         _this.setData({
           commenting: false
         })
@@ -385,7 +385,7 @@ Page({
         page_id: this.data.currentPage._id
       },
       success: res => {
-        console.log(res) 
+        //console.log(res) 
         this.setData({
           liked: true,
           likeCount: this.data.likeCount +1
