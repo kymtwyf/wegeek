@@ -87,7 +87,7 @@ Page({
   },
   touchend: function(event) {
     console.log('touchend');
-    console.log(event);
+    //console.log(event);
     // let endX = event.changedTouches[0].pageX;
     // let endY = event.changedTouches[0].pageY;
     // console.log(JSON.stringify(this.data));

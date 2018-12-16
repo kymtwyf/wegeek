@@ -234,6 +234,7 @@ Page({
     })
   },
   onCommentsTouchEnd: function (event) {
+    console.log("comments touch end");
     let touchEnd = event.changedTouches[0];
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     if (action === 'LEFT') {
@@ -244,7 +245,7 @@ Page({
         })
       }
     } else if (action == 'RIGHT') {
-      if (this.data.commentIndex - 1 > 0) {
+      if (this.data.commentIndex - 1 >= 0) {
         this.setData({
           commentIndex: this.data.commentIndex - 1,
           commentContent: this.data.comments[this.data.commentIndex - 1].comment_content

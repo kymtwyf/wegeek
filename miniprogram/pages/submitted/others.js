@@ -187,7 +187,12 @@ Page({
       commentContent: ''
     })
   },
-
+  closeCommenting: function () {
+    this.setData({
+      commenting: false,
+      commentText: ''
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */
@@ -263,6 +268,9 @@ Page({
         })
       }
     } else if ((action == 'RIGHT' && this.data.reverse == "desc") || (action == 'LEFT' && this.data.reverse == 'asc')) {
+      this.setData({
+        liked: false
+      })
       if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
         if (!this.data.viewAllOthers) {
           // only viewing some one's

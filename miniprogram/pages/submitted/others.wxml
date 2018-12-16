@@ -10,11 +10,12 @@
     <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
     <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
     <image class="back-to-home" src="../../images/back-to-home@2x.png" catch:tap="backHome"/>
-    <textarea
-      class="text"
-      value="{{pageContent}}"
-      disabled=true
-    />
+    <view class="text-container">
+      <text
+        class="text">
+        {{pageContent}}
+        </text>
+    </view>
 
     <view class="comment-status">
       <i class="font_family icon-xihuan" style="font-size :35rpx;color: {{liked ?'red':'grey'}}"  catch:tap="submitLike"/>
@@ -40,17 +41,18 @@
       data-id="123">
       <image class="background" 
         src="../../images/comments-bg@2x.png"/>
-      <textarea
-        class="text"
-        value="{{commentContent}}"
-        disabled=true
-        />
+      <view class="text-container">
+        <text class="text">
+          {{commentContent}}
+        </text>
+      </view>
     </view>
   </view>
 
   <view wx:if="{{commenting}}"
-    class="commenting-container">
-    <view class="comment-text-wrapper">
+    class="commenting-container"
+    catch:tap="closeCommenting">
+    <view class="comment-text-wrapper" catch:tap="doNothing">
       <textarea class="comment-text text"
         value="{{commentText}}"
         placeholder="言之凿凿"
