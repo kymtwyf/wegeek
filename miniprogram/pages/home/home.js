@@ -81,14 +81,14 @@ Page({
         likes: 0
       },
       success: res => {
-        console.log(res);
+        //console.log(res);
         res = JSON.parse(res.result);
-        console.log(res);
+        //console.log(res);
         this.setData({
           currentText: '',
           setSubmit: false
         })
-        console.log(getCurrentPages())
+        //console.log(getCurrentPages())
         wx.navigateTo({
           url: '../submitted/submitted?reverse=desc&from_uri=root'
         })
@@ -104,7 +104,7 @@ Page({
   },
 
   bindTextAreaBlur: function(e) {
-    console.log(e.detail.value)
+    //console.log(e.detail.value)
     this.setData({
       currentText: e.detail.value,
     })
@@ -192,7 +192,7 @@ Page({
     let action = getSlideDirection(this.data.touchStart, touchEnd);
 
     if (action === 'RIGHT') {
-      console.log(getCurrentPages())
+      //console.log(getCurrentPages())
       wx.navigateTo({
         url: '../submitted/submitted?from_uri=root&reverse=desc'
       })
