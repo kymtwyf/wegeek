@@ -58,6 +58,11 @@
   background-color: rgba(248,248,248,1);
   border-radius: 30rpx 0rpx 0rpx 30rpx;  
 }
+
+.comment-status > i,
+.comment-status > view {
+  width: 25%;
+}
 .text-wrapper > .back-to-home {
   position: absolute;
   left: 88rpx;

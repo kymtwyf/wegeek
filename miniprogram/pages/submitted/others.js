@@ -53,7 +53,10 @@ Page({
     exclude: [],
     othersOpenId: undefined,
     viewAllOthers: true,
-    currentPage: undefined
+    currentPage: undefined,
+
+    commenting: false, //正在评论别人
+    commentText: undefined// 评论别人的文字
   },
   viewOnes: function () {
     const db = wx.cloud.database()
@@ -101,27 +104,45 @@ Page({
     //   reverse: options.reverse
     // })
     const db = wx.cloud.database()
-    wx.cloud.callFunction({
-      name: 'dispatchPages',
-      data: {
-        openid: app.globalData.openid,
-        exclude: this.data.exclude
-      },
-      success: res => {
-        var result = JSON.parse(res.result)
-        console.log('dispatched pages')
-        console.log(result)
-        this.data.pages = result
-        this.data.pageIndex = 0
-        // 我们看过之后再加 exclude
-        // for (var i = 0; i < result.length; i++) {
-        //   console.log(result[i])
-        //   this.data.exclude.push(result[i]._id)
-        // }
-        // console.log(this.data.exclude)
-        this.onLoadPage(result[0])
-      }
-    });
+    const _this = this
+    if (!app.globalData.openid) {
+      wx.cloud.callFunction({
+        name: 'login',
+        data: {},
+        success: res => {
+          console.log('[云函数] [login] user openid: ', res.result.openid)
+          app.globalData.openid = res.result.openid
+          console.log('get openid' + app.globalData.openid + ' requesting data again');
+          _this.onLoad()
+        },
+        fail: err => {
+          console.error('[云函数] [login] 调用失败', err)
+        }
+      })
+    } else {
+      wx.cloud.callFunction({
+        name: 'dispatchPages',
+        data: {
+          openid: app.globalData.openid,
+          exclude: this.data.exclude
+        },
+        success: res => {
+          var result = JSON.parse(res.result)
+          console.log('dispatched pages')
+          console.log(result)
+          this.data.pages = result
+          this.data.pageIndex = 0
+          // 我们看过之后再加 exclude
+          // for (var i = 0; i < result.length; i++) {
+          //   console.log(result[i])
+          //   this.data.exclude.push(result[i]._id)
+          // }
+          // console.log(this.data.exclude)
+          this.onLoadPage(result[0])
+        }
+      });
+    }
+    
   },
   backHome: function () {
     if (this.data.fromPage == "root") {
@@ -133,12 +154,12 @@ Page({
   viewComment: function () {
     console.log('view comments')
     if (this.data.commentCount === 0) {
-      console.log('nothing to view; return;')
-      return 
+      // console.log('nothing to view; return;')
+      // return 
     }
     this.setData({
-      showComments: true,
-      commentContent: this.data.comments[this.data.commentIndex].comment_content
+      commenting: true,
+      commentText: null
     })
   },
   closeComment: function () {
@@ -237,7 +258,7 @@ Page({
           })
         } else {
           // viewing all others
-          
+
         }
       }
       
@@ -303,5 +324,34 @@ Page({
     wx.navigateTo({
       url: './submitted'
     })
-  }
+  },
+  submitComment: function () {
+    const _this = this
+    if (this.data.commentText) {
+      const db = wx.cloud.database()
+      db.collection('comments').add({
+        data: {
+          comment_content: this.data.commentText,
+          page_id: this.data.currentPage._id
+        }
+      }).then(res => {
+        console.log(res);
+        _this.setData({
+          commenting: false
+        })
+        _this.onLoadPage(this.data.currentPage)
+      })
+    } else {
+      console.log('only closing');
+      this.setData({
+        commenting: false
+      })
+    }
+  },
+  bindEquipmentId: function (e) {
+    this.setData({
+      commentText: e.detail.value
+    })
+  },
+
 })

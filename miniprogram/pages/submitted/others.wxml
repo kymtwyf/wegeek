@@ -47,4 +47,17 @@
         />
     </view>
   </view>
+
+  <view wx:if="{{commenting}}"
+    class="commenting-container">
+    <view class="comment-text-wrapper">
+      <textarea class="comment-text text"
+        value="{{commentText}}"
+        placeholder="言之凿凿"
+        bindinput='bindEquipmentId'/>
+    </view>
+    <view class="btn-submit-comment" catch:tap="submitComment">
+      回复
+    </view>
+  </view>
 </view>

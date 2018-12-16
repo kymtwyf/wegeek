@@ -223,7 +223,7 @@ Page({
     let touchEnd = event.changedTouches[0];
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     if (action === 'LEFT') {
-      if (this.data.commentIndex + 1 < comment.length) {
+      if (this.data.commentIndex + 1 < this.data.comments.length) {
         this.setData({
           commentIndex: this.data.commentIndex + 1,
           commentContent: this.data.comments[this.data.commentIndex + 1].comment_content
