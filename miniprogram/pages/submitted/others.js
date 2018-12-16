@@ -95,7 +95,7 @@ Page({
     })
   },
   onLoadPage: function (page) {
-    console.log(page)
+    //console.log(page)
     db.collection('comments').where({
       page_id: page._id
     }).get().then(res => {
@@ -360,7 +360,7 @@ Page({
     }
   },
   goMyBook: function () {
-    this.smartNavigate('page/submitted/submitted')
+    this.smartNavigate('pages/submitted/submitted')
   },
   submitComment: function () {
     const _this = this
