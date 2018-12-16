@@ -67,7 +67,24 @@ Page({
     }).catch(err => {
     })
   },
-  
+  smartNavigate: function (route) {
+    var pages = getCurrentPages()
+    for (var i = 0; i < pages.length; i++) {
+      console.log(pages[i])
+      if (pages[i].route === route) {
+        wx.navigateBack({
+          delta: pages.length - i
+        })
+        break
+      }
+    }
+    if (i == pages.length) {
+      route = '/' + route
+      wx.navigateTo({
+        url: route
+      })
+    }
+  },
   /**
    * 生命周期函数--监听页面加载
    */
@@ -95,11 +112,7 @@ Page({
     })
   },
   backHome: function () {
-    if (this.data.fromPage == "root") {
-      wx.navigateBack({
-        delta: 1
-      });
-    }
+    this.smartNavigate('pages/home/home')
   },
   viewComment: function () {
     console.log('view comments')
@@ -177,9 +190,7 @@ Page({
     let action = getSlideDirection(this.data.touchStart, touchEnd);
     if (action === 'UP') {
       console.log('go my book page')
-      wx.navigateTo({
-        url: '../myBook/myBook'
-      })
+      this.smartNavigate('pages/myBook/myBook')
     } else if ((action == 'LEFT' && this.data.reverse == "desc") || (action == 'RIGHT' && this.data.reverse == 'asc')) {
       console.log(this.data.fromPage)
       if (this.data.pageIndex - 1 >= 0){
@@ -187,10 +198,8 @@ Page({
         this.setData({
           pageIndex: this.data.pageIndex - 1
         })
-      } else if (this.data.fromPage == "root") {
-        wx.navigateBack({
-          delta: 1
-        });
+      } else {
+        this.smartNavigate('pages/home/home')
       }
     } else if ((action == 'RIGHT' && this.data.reverse == "desc") || (action == 'LEFT' && this.data.reverse == 'asc')) {
       if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
@@ -242,8 +251,6 @@ Page({
     console.log('do nothing')
   },
   goOthersPages: function () {
-    wx.navigateTo({
-      url: './others'
-    })
+    this.smartNavigate('pages/subitted/others')
   }
 })

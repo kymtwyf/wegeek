@@ -1,11 +1,13 @@
 // miniprogram/pages/myBook/myBook.js
+import { getSlideDirection } from '../utils';
 Page({
 
   /**
    * 页面的初始数据
    */
   data: {
-    bar_Height: wx.getSystemInfoSync().statusBarHeight
+    bar_Height: wx.getSystemInfoSync().statusBarHeight,
+    touchStart: undefined
   },
 
   /**
@@ -70,5 +72,21 @@ Page({
     wx.navigateBack({
       delta: 1
     })
+  },
+  onTouchStart(event) {
+    this.setData({
+      touchStart: event.touches[0]
+    })
+  },
+  onTouchEnd(event) {
+    let touchEnd = event.changedTouches[0];
+    let action = getSlideDirection(this.data.touchStart, touchEnd);
+
+    if (action === 'DOWN') {
+      wx.navigateBack({
+        delta: 1
+      })
+    }
+
   }
 })
