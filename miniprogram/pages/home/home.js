@@ -84,6 +84,11 @@ Page({
         console.log(res);
         res = JSON.parse(res.result);
         console.log(res);
+        this.setData({
+          currentText: '',
+          setSubmit: false
+        })
+        console.log(getCurrentPages())
         wx.navigateTo({
           url: '../submitted/submitted?reverse=desc&from_uri=root'
         })
@@ -187,6 +192,7 @@ Page({
     let action = getSlideDirection(this.data.touchStart, touchEnd);
 
     if (action === 'RIGHT') {
+      console.log(getCurrentPages())
       wx.navigateTo({
         url: '../submitted/submitted?from_uri=root&reverse=desc'
       })
