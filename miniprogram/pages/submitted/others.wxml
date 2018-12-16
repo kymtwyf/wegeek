@@ -9,7 +9,7 @@
   <view class="text-wrapper" bind:tap="goViewOnes">
     <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
     <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
-    <image class="back-to-home" src="../../images/back-to-home@2x.png" catch:tap="backHome"/>
+    <image class="back-to-home" src="../../images/back-to-home@2x.png" wx:if="{{ !viewAllOthers }}" catch:tap="backHome"/>
     <view class="text-container">
       <text
         class="text">
