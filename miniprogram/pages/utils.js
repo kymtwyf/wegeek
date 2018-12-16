@@ -35,7 +35,9 @@ const utils = {
    *    或者 null 当X/Y 没动都小于MIN_DIFF
    */
   getSlideDirection: (startTouch, endTouch) => {
-    return getSlideDirection(startTouch, endTouch);
+    let action = getSlideDirection(startTouch, endTouch);
+    console.log('[detected action]' + action);
+    return action;
   }
 }
 
