@@ -12,8 +12,7 @@
     "pages/home/welcome",
     "pages/submitted/submitted",
     "pages/submitted/others",
-    "pages/myBook/myBook",
-    "pages/others/pages"
+    "pages/myBook/myBook"
   ],
   "window": {
     "backgroundColor": "#F6F6F6",
