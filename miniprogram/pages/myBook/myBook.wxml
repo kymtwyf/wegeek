@@ -3,7 +3,8 @@
   <view class='tabar' style='margin-top:{{bar_Height}}px;'>
     <view>我的书</view>
   </view>
-  <view class="book-wrapper" bind:tap="goMyBook">
+  <view class="book-wrapper" bind:tap="goMyBook" bind:touchstart="onTouchStart"
+  bind:touchend="onTouchEnd">
     <image class="book" src="../../images/book@2x.png"/>
   </view>
 </view>
