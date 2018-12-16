@@ -84,6 +84,10 @@ Page({
         console.log(res);
         res = JSON.parse(res.result);
         console.log(res);
+        this.setData({
+          currentText: '',
+          setSubmit: false
+        })
         wx.navigateTo({
           url: '../submitted/submitted?reverse=desc&from_uri=root'
         })
