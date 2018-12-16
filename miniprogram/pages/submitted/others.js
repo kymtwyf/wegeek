@@ -187,7 +187,12 @@ Page({
       commentContent: ''
     })
   },
-
+  closeCommenting: function () {
+    this.setData({
+      commenting: false,
+      commentText: ''
+    })
+  },
   /**
    * 生命周期函数--监听页面初次渲染完成
    */

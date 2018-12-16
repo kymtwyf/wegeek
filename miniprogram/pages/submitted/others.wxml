@@ -50,8 +50,9 @@
   </view>
 
   <view wx:if="{{commenting}}"
-    class="commenting-container">
-    <view class="comment-text-wrapper">
+    class="commenting-container"
+    catch:tap="closeCommenting">
+    <view class="comment-text-wrapper" catch:tap="doNothing">
       <textarea class="comment-text text"
         value="{{commentText}}"
         placeholder="言之凿凿"
