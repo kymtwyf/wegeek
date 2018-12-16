@@ -74,8 +74,8 @@ Page({
   onLoad: function (options) {
     console.log(options)
     this.setData({
-      fromPage: options.from_uri,
-      reverse: options.reverse
+      fromPage: options.from_uri || '',
+      reverse: options.reverse || 'desc'
     })
     const db = wx.cloud.database()
     console.log(getApp().globalData.openid)

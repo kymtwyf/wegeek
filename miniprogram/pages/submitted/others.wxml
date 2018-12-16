@@ -27,7 +27,11 @@
       </view>
     </view>
   </view>
-
+  <view class="my-book-container" bind:tap="goMyBook">
+    <view class="my-book">
+        我的书
+    </view>
+  </view>
   <view wx:if="{{ showComments }}"
     class="comments-container" catch:tap="closeComment">
     <view class="comments" bind:touch="onCommentsTouchStart"

@@ -55,7 +55,23 @@ Page({
     viewAllOthers: true,
     currentPage: undefined
   },
-
+  viewOnes: function () {
+    const db = wx.cloud.database()
+    db.collection('pages').where({
+      _openid: this.data.othersOpenId
+    }).orderBy('publish_time', this.data.reverse).get({
+      success: (res) => {
+        console.log(res)
+        this.setData({
+          pages: res.data,
+          pageIndex: 0
+        })
+        this.onLoadPage(res.data[0])
+      },
+      fail: (err) => {
+      }
+    })
+  },
   onLoadPage: function (page) {
     console.log(page)
     db.collection('comments').where({
@@ -88,13 +104,13 @@ Page({
     wx.cloud.callFunction({
       name: 'dispatchPages',
       data: {
-        openid: this.data.othersOpenId || app.globalData.openid,
+        openid: app.globalData.openid,
         exclude: this.data.exclude
       },
       success: res => {
-        console.log('dispatched pages')
-        console.log(res)
         var result = JSON.parse(res.result)
+        console.log('dispatched pages')
+        console.log(result)
         this.data.pages = result
         this.data.pageIndex = 0
         // 我们看过之后再加 exclude
@@ -208,15 +224,21 @@ Page({
       }
     } else if ((action == 'RIGHT' && this.data.reverse == "desc") || (action == 'LEFT' && this.data.reverse == 'asc')) {
       if (this.data.pageIndex + 1 > this.data.pages.length - 5) {
-        db.collection('pages').where({
-          _openid: getApp().globalData.openid
-        }).orderBy('publish_time', this.data.reverse)
-          .skip(this.data.pages.length).get().then(res => {
-          console.log(res)
-          this.setData({ 
-            pages: this.data.pages.concat(res.data)
+        if (!this.data.viewAllOthers) {
+          // only viewing some one's
+          db.collection('pages').where({
+            _openid: this.data.othersOpenId
+          }).orderBy('publish_time', this.data.reverse)
+            .skip(this.data.pages.length).get().then(res => {
+            console.log(res)
+            this.setData({ 
+              pages: this.data.pages.concat(res.data)
+            })
           })
-        })
+        } else {
+          // viewing all others
+          
+        }
       }
       
       if (this.data.pageIndex + 1 < this.data.pages.length) {
@@ -266,14 +288,20 @@ Page({
   },
   goViewOnes: function () {
     if (this.data.viewAllOthers) {
-      this.setData({
-        othersOpenId: this.data.currentPage ? this.data.currentPage._openid : undefined,
+      let setDataRes = this.setData({
+        othersOpenId: this.data.currentPage ? this.data.currentPage._openid : '',
         viewAllOthers: false
       })
-
-      this.onLoad()
+      console.log(setDataRes)
+      // this.onLoad()
+      this.viewOnes()
     } else {
       console.log(' you are viewing ' + this.data.othersOpenId +  '\'s pages');
     }
+  },
+  goMyBook: function () {
+    wx.navigateTo({
+      url: './submitted'
+    })
   }
 })
