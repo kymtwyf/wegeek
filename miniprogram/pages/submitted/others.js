@@ -285,7 +285,19 @@ Page({
           })
         } else {
           // viewing all others
-
+          wx.cloud.callFunction({
+            name: 'dispatchPages',
+            data: {
+              openid: app.globalData.openid,
+              exclude: this.data.exclude
+            },
+            success: res => {
+              var result = JSON.parse(res.result)
+              console.log('dispatched pages')
+              
+              this.data.pages = this.data.pages.concat(result)
+            }
+          });
         }
       }
       
