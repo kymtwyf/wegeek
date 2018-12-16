@@ -10,10 +10,12 @@
     <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
     <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
     <image class="back-to-home" src="../../images/back-to-home@2x.png" catch:tap="backHome"/>
-    <view
-      class="text">
-      {{pageContent}}
-      </view>
+    <view class="text-container">
+      <text
+        class="text">
+        {{pageContent}}
+        </text>
+    </view>
 
     <view class="comment-status">
       <i class="font_family icon-xihuan" style="font-size :35rpx;color: {{liked ?'red':'grey'}}"  catch:tap="submitLike"/>
@@ -39,8 +41,10 @@
       data-id="123">
       <image class="background" 
         src="../../images/comments-bg@2x.png"/>
-      <view class="text">
-        {{commentContent}}
+      <view class="text-container">
+        <text class="text">
+          {{commentContent}}
+        </text>
       </view>
     </view>
   </view>

@@ -29,9 +29,14 @@ textarea.text {
   font-size: 28rpx;
   color: rgba(51, 51, 51, 1)
 }
-view.text {
-  white-space: pre;
+view.text-container {
   height: 480rpx;
   font-size: 28rpx;
-  color: rgba(51, 51, 51, 1)
+  color: rgba(51, 51, 51, 1);
+  overflow-y: scroll;
+}
+text.text {
+  width: 558rpx;
+  word-break: keep-all;
+  word-wrap: break-word;
 }
