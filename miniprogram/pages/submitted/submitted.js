@@ -251,6 +251,6 @@ Page({
     console.log('do nothing')
   },
   goOthersPages: function () {
-    this.smartNavigate('pages/subitted/others')
+    this.smartNavigate('pages/submitted/others')
   }
 })
