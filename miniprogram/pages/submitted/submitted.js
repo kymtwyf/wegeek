@@ -61,7 +61,7 @@ Page({
         commentCount: res.data.length,
         comments: res.data,
         color: page.color,
-        likeCount: page.likes,
+        likeCount: page.likes || 0,
         pageContent: page.page_content + '\n\t\t\t\t\t' + currentDate() 
       })
     }).catch(err => {

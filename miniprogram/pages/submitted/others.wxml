@@ -17,8 +17,8 @@
     />
 
     <view class="comment-status">
-      <i class="font_family icon-xihuan" style="font-size :35rpx;color :gray"/>
-      <view class="like-count">
+      <i class="font_family icon-xihuan" style="font-size :35rpx;color: {{liked ?'red':'grey'}}"  catch:tap="submitLike"/>
+      <view class="like-count"  catch:tap="submitLike">
         {{ likeCount }}
       </view>
       <i class="font_family icon-pinglun" style="font-size :35rpx;color :gray" catch:tap="viewComment"/>

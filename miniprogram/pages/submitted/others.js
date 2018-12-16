@@ -56,7 +56,8 @@ Page({
     currentPage: undefined,
 
     commenting: false, //正在评论别人
-    commentText: undefined// 评论别人的文字
+    commentText: undefined,// 评论别人的文字
+    liked: false,
   },
   viewOnes: function () {
     const db = wx.cloud.database()
@@ -86,7 +87,7 @@ Page({
         commentCount: res.data.length,
         comments: res.data,
         color: page.color,
-        likeCount: page.likes,
+        likeCount: page.likes || 0,
         pageContent: page.page_content + '\n\t\t\t\t\t' + currentDate() 
       })
     }).catch(err => {
@@ -353,5 +354,19 @@ Page({
       commentText: e.detail.value
     })
   },
-
+  submitLike: function() {
+    wx.cloud.callFunction({
+      name: 'likePage',
+      data: {
+        page_id: this.data.currentPage._id
+      },
+      success: res => {
+        console.log(res) 
+        this.setData({
+          liked: true,
+          likeCount: this.data.likeCount +1
+        })
+      }
+    })
+  }
 })
