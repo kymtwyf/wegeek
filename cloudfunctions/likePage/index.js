@@ -15,7 +15,7 @@ exports.main = async (event, context) => new Promise((resolve, reject) => {
     }
   })
   .then(res => {
-    console.log(res)
+    //console.log(res)
     resolve(JSON.stringify(res))
   })
 })

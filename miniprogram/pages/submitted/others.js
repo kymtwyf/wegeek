@@ -95,7 +95,7 @@ Page({
     })
   },
   onLoadPage: function (page) {
-    console.log(page)
+    //console.log(page)
     db.collection('comments').where({
       page_id: page._id
     }).get().then(res => {
