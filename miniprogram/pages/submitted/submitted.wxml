@@ -37,15 +37,15 @@
 
   <view wx:if="{{ showComments }}"
     class="comments-container" catch:tap="closeComment">
-    <view class="comments" bind:touch="onCommentsTouchStart"
-      bind:touchend="onCommentsTouchEnd"
+    <view class="comments" catch:touch="onCommentsTouchStart"
+      catch:touchend="onCommentsTouchEnd"
       catch:tap="doNothing"
       data-id="123">
       <image class="background" 
         src="../../images/comments-bg@2x.png"/>
       <view class="text-container">
         <text class="text">
-          {{pageContent}}
+          {{commentContent}}
         </text>
       </view>
     </view>
