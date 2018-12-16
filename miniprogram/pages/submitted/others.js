@@ -348,7 +348,7 @@ Page({
     }
   },
   goMyBook: function () {
-    this.smartNavigate('page/submitted/submitted')
+    this.smartNavigate('pages/submitted/submitted')
   },
   submitComment: function () {
     const _this = this
