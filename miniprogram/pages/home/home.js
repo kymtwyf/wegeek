@@ -145,7 +145,7 @@ Page({
       _this.setData({
         showWelcome: false
       })
-    }, 1000);
+    }, 3000);
   },
 
   /**
