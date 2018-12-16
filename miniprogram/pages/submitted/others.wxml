@@ -1,0 +1,63 @@
+<!--miniprogram/home/home.wxml-->
+<view class="page-body {{showWelcome ? '':'show'}}"
+  style="{{color ? ('background:linear-gradient(-45deg,' + color[0] +',' + color[1]+');'): ''}}"
+  bind:touchstart="onTouchStart"
+  bind:touchend="onTouchEnd">
+  <view class='tabar' style='margin-top:{{bar_Height}}px;'>
+    <view>别人的书</view>
+  </view>
+  <view class="text-wrapper" bind:tap="goViewOnes">
+    <image class="background" wx:if="{{!viewAllOthers}}" src="../../images/home-bg@2x.png"/>
+    <image class="background" wx:if="{{viewAllOthers}}" src="../../images/comments-bg@2x.png"/>
+    <image class="back-to-home" src="../../images/back-to-home@2x.png" catch:tap="backHome"/>
+    <textarea
+      class="text"
+      value="{{pageContent}}"
+      disabled=true
+    />
+
+    <view class="comment-status">
+      <i class="font_family icon-xihuan" style="font-size :35rpx;color :gray"/>
+      <view class="like-count">
+        {{ likeCount }}
+      </view>
+      <i class="font_family icon-pinglun" style="font-size :35rpx;color :gray" catch:tap="viewComment"/>
+      <view class="comment-count" catch:tap="viewComment">
+        {{ commentCount }}
+      </view>
+    </view>
+  </view>
+  <view class="my-book-container" bind:tap="goMyBook">
+    <view class="my-book">
+        我的书
+    </view>
+  </view>
+  <view wx:if="{{ showComments }}"
+    class="comments-container" catch:tap="closeComment">
+    <view class="comments" bind:touch="onCommentsTouchStart"
+      bind:touchend="onCommentsTouchEnd"
+      catch:tap="doNothing"
+      data-id="123">
+      <image class="background" 
+        src="../../images/comments-bg@2x.png"/>
+      <textarea
+        class="text"
+        value="{{commentContent}}"
+        disabled=true
+        />
+    </view>
+  </view>
+
+  <view wx:if="{{commenting}}"
+    class="commenting-container">
+    <view class="comment-text-wrapper">
+      <textarea class="comment-text text"
+        value="{{commentText}}"
+        placeholder="言之凿凿"
+        bindinput='bindEquipmentId'/>
+    </view>
+    <view class="btn-submit-comment" catch:tap="submitComment">
+      回复
+    </view>
+  </view>
+</view>
