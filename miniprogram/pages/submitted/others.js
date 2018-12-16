@@ -256,6 +256,9 @@ Page({
       this.onLoad()
     } else if ((action == 'LEFT' && this.data.reverse == "desc") || (action == 'RIGHT' && this.data.reverse == 'asc')) {
       //console.log(this.data.fromPage)
+      this.setData({
+        liked: false
+      })
       if (this.data.pageIndex - 1 >= 0){
         this.onLoadPage(this.data.pages[this.data.pageIndex - 1])
         this.setData({
